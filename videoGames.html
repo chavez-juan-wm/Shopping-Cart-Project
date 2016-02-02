@@ -14,8 +14,8 @@
     <style>
         img
         {
-            width: 210px;
-            height: 220px;
+            width: 185px;
+            height: 115px;
         }
         .secondDiv
         {
@@ -24,18 +24,37 @@
             width: 100%;
             height: 100%;
             z-index: 2;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.65);
         }
         .information
         {
             background-color: white;
+            border: solid;
             margin-left: auto;
             margin-right: auto;
             margin-top: 5.5%;
-            width: 80%;
-            height: 80%;
+            width: 50%;
+            height: 70%;
             z-index: 3;
             background: rgba(255, 255, 255, 1);
+        }
+        .image
+        {
+            width: 35%;
+            padding-top: 30px;
+            padding-left: 55px;
+        }
+        .imgInfo
+        {
+            width: auto;
+            height: 90%;
+            padding-top: 2px;
+            padding-left: 60px;
+            padding-bottom: 15px;
+            padding-right: 60px;
+            background-color: lightgray;
+            float: left;
+            border: solid;
         }
     </style>
 </head>
@@ -48,15 +67,9 @@
 
         $(".close").click(function(){
             $(".secondDiv").fadeOut(400);
-            $("#product1").fadeOut(400);
-            $("#product2").fadeOut(400);
-            $("#product3").fadeOut(400);
-            $("#product4").fadeOut(400);
-            $("#product5").fadeOut(400);
-            $("#product6").fadeOut(400);
-            $("#product7").fadeOut(400);
-            $("#product8").fadeOut(400);
-            $("#product9").fadeOut(400);
+
+            for(i = 1; i<=9; i++)
+                $("#product" + i).fadeOut(400);
         });
 
         $("#img1").click(function(){
@@ -136,51 +149,70 @@
 
 <div id = bodyText>
 <!--display: none-->
-    <div class="secondDiv" style="display: none">
-        <div class="information">
-            <div id="product1" style="display: none">
+    <div class="secondDiv">
+        <div class="information"style="height: 55%;">
+            <div id="product1">
                 <button class="close">&#10006;</button>
-                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8Ei1gJI7dTGdQh8OtJtIi9986jLZ8xDQa1ZHpqkYNLoU1qHr-" style="width: auto; height: auto">
+
+                <div style="border: solid; width: 50%; float: left">
+                    <div class="image">
+                        <img src="https://ksr-ugc.imgix.net/projects/1542071/photo-original.png?v=1420836802&w=1536&h=1152&fit=crop&auto=format&q=92&s=cd511c9243f8e71bfb69d7ac9acc4116" style="width: 140%; height: 120%">
+
+                    </div>
+                </div>
+
+                <div style="border: solid; float: left">
+                    <h3>Exploding Kittens</h3>
+                </div>
+
+                <div class="imgInfo">
+                    <p>Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! </p>
+                </div>
+
             </div>
 
             <div id="product2" style="display: none">
                 <button class="close">&#10006;</button>
-                <img src="https://www.destinythegame.com/content/dam/atvi/bungie/dtg-comet/wtb/destiny.jpg" style="width: auto; height: auto">
+
+                <div class="image">
+                    <img src="" style="width: auto; height: auto">
+                </div>
+
             </div>
 
             <div id="product3" style="display: none">
                 <button class="close">&#10006;</button>
-                <img src="https://upload.wikimedia.org/wikipedia/en/7/70/Fallout_4_cover_art.jpg" style="width: auto; height: auto">
+                <img src="" style="width: auto; height: auto">
             </div>
 
             <div id="product4" style="display: none">
                 <button class="close">&#10006;</button>
-                <img src="http://www.therobotsvoice.com/wp-content/uploads/2015/10/cod_blackops3_reveal.jpg" style="width: auto; height: auto">
+                <img src="" style="width: auto; height: auto">
             </div>
 
             <div id="product5" style="display: none">
                 <button class="close">&#10006;</button>
-                <img src="http://prodimage.images-bn.com/pimages/9780963580528_p0_v2_s550x406.jpg" style="width: auto; height: auto">
+                <img src="" style="width: auto; height: auto">
             </div>
 
             <div id="product6" style="display: none">
                 <button class="close">&#10006;</button>
-                <img src="http://img04.taobaocdn.com/bao/uploaded/i4/T1dcuiXiFbXXX.VqoZ_031313.jpg" style="width: auto; height: auto">
+                <img src="" style="width: auto; height: auto">
             </div>
 
             <div id="product7" style="display: none">
                 <button class="close">&#10006;</button>
-                <img src="http://ecx.images-amazon.com/images/I/51g9KWUTKPL._SX300_.jpg" style="width: auto; height: auto">
+                <img src="" style="width: auto; height: auto">
             </div>
 
             <div id="product8" style="display: none">
                 <button class="close">&#10006;</button>
-                <img src="http://ecx.images-amazon.com/images/I/51g9KWUTKPL._SX300_.jpg" style="width: auto; height: auto">
+                <img src="" style="width: auto; height: auto">
             </div>
 
             <div id="product9" style="display: none">
                 <button class="close">&#10006;</button>
-                <img src="http://ecx.images-amazon.com/images/I/51g9KWUTKPL._SX300_.jpg" style="width: auto; height: auto">
+                <img src="" style="width: auto; height: auto">
             </div>
 
         </div>
@@ -188,9 +220,9 @@
 
     <table align="center">
         <tr>
-            <td><img id= "img1" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8Ei1gJI7dTGdQh8OtJtIi9986jLZ8xDQa1ZHpqkYNLoU1qHr-"></td>
-            <td><img id= "img2" src="https://www.destinythegame.com/content/dam/atvi/bungie/dtg-comet/wtb/destiny.jpg"></td>
-            <td><img id= "img3" src="https://upload.wikimedia.org/wikipedia/en/7/70/Fallout_4_cover_art.jpg"></td>
+            <td><img id= "img1" src=""></td>
+            <td><img id= "img2" src=""></td>
+            <td><img id= "img3" src=""></td>
         </tr>
         <tr>
             <td class="description" valign="top"></td>
@@ -198,9 +230,9 @@
             <td class="description" valign="top"></td>
         </tr>
         <tr>
-            <td><img id= "img4" src="http://www.therobotsvoice.com/wp-content/uploads/2015/10/cod_blackops3_reveal.jpg"></td>
-            <td><img id= "img5" src="http://suckerpunch.playstation.com/images/stories/slider/front_page/delsinlaunchcover.jpg"></td>
-            <td><img id= "img6" src="http://www.readersgambit.com/wp-content/uploads/2015/03/Bloodborne-Banner.jpg"></td>
+            <td><img id= "img4" src=""></td>
+            <td><img id= "img5" src=""></td>
+            <td><img id= "img6" src=""></td>
         </tr>
         <tr>
             <td class="description" valign="top"></td>
