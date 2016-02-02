@@ -12,6 +12,33 @@
     <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
 
     <style>
+        .btn {
+            background: #ffcc4a;
+            background-image: -webkit-linear-gradient(top, #ffcc4a, #d69807);
+            background-image: -moz-linear-gradient(top, #ffcc4a, #d69807);
+            background-image: -ms-linear-gradient(top, #ffcc4a, #d69807);
+            background-image: -o-linear-gradient(top, #ffcc4a, #d69807);
+            background-image: linear-gradient(to bottom, #ffcc4a, #d69807);
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0px;
+            font-family: Georgia;
+            color: #000000;
+            font-size: 18px;
+            padding: 2px 18px 2px 18px;
+            text-decoration: none;
+            margin: 0 auto;
+        }
+
+        .btn:hover {
+            background: #eba605;
+            background-image: -webkit-linear-gradient(top, #eba605, #e0ac10);
+            background-image: -moz-linear-gradient(top, #eba605, #e0ac10);
+            background-image: -ms-linear-gradient(top, #eba605, #e0ac10);
+            background-image: -o-linear-gradient(top, #eba605, #e0ac10);
+            background-image: linear-gradient(to bottom, #eba605, #e0ac10);
+            text-decoration: none;
+        }
         img
         {
             width: 185px;
@@ -33,7 +60,7 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: 5.5%;
-            width: 50%;
+            width: 55%;
             height: 70%;
             z-index: 3;
             background: rgba(255, 255, 255, 1);
@@ -47,14 +74,12 @@
         .imgInfo
         {
             width: auto;
-            height: 90%;
-            padding-top: 2px;
+            padding-top: 4px;
             padding-left: 60px;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
             padding-right: 60px;
             background-color: lightgray;
             float: left;
-            border: solid;
         }
     </style>
 </head>
@@ -154,19 +179,29 @@
             <div id="product1">
                 <button class="close">&#10006;</button>
 
-                <div style="border: solid; width: 50%; float: left">
+                <div style="width: 50%; float: left">
                     <div class="image">
-                        <img src="https://ksr-ugc.imgix.net/projects/1542071/photo-original.png?v=1420836802&w=1536&h=1152&fit=crop&auto=format&q=92&s=cd511c9243f8e71bfb69d7ac9acc4116" style="width: 140%; height: 120%">
-
+                        <img src="https://ksr-ugc.imgix.net/projects/1542071/photo-original.png?v=1420836802&w=1536&h=1152&fit=crop&auto=format&q=92&s=cd511c9243f8e71bfb69d7ac9acc4116" style="width: 200%; height: 180%">
                     </div>
                 </div>
 
-                <div style="border: solid; float: left">
-                    <h3>Exploding Kittens</h3>
+                <div style="float: left; margin-top: 2%; margin-left: 12%">
+                    <h2 style="text-align: center">Exploding Kittens</h2>
+                    <h3 style="text-align: center">$20.00</h3>
+                    <div style="text-align: center">
+                        <button class="btn">Add to Cart</button>
+                    </div>
+
                 </div>
 
                 <div class="imgInfo">
-                    <p>Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! Something random to see how it will look like! </p>
+                    <ul>
+                        <li>Exploding Kittens is a card game for people who are into kittens and explosions and laser beams and sometimes goats.</li>
+                        <li>Family-friendly, party game for 2-5 players (up to 9 players when combined with any other deck).</li>
+                        <li>This is the most-backed project in Kickstarter history and all cards feature illustrations by The Oatmeal.</li>
+                        <li>Includes 56 cards (2.5 x 3.5 inches), box, and instructions.</li>
+                        <li>This box, like 99.99% of boxes, does not meow</li>
+                    </ul>
                 </div>
 
             </div>
