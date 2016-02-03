@@ -17,10 +17,10 @@ table
 }
 .description
 {
+    text-align: center;
     border: solid gray;
-    height: 100px;
+    height: 70px;
     width: 190px;
-    padding-left: 5px;
 }
 .close
 {
