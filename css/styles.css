@@ -2,8 +2,8 @@
 {
     margin-left: auto;
     margin-right: auto;
-    border: solid;
-    border-color: #333;
+    border: solid #333;
+    border-top: none;
     width: 99.58%;
     height: auto;
     position: relative;
@@ -11,6 +11,7 @@
     background-color: white;
 }
 
+/*Start of the Products CSS*/
 table
 {
     border-spacing: 10px;
@@ -27,11 +28,121 @@ table
     float: right;
     width: 70px;
     height: 55px;
-    background-color: Transparent;
-    background-repeat: no-repeat;
+    background: transparent no-repeat;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
     overflow: hidden;
-    outline:none;
+    outline: none;
     font-size: 175%;
 }
+
+.secondDiv
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.65);
+}
+.information
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5.5%;
+    width: 55%;
+    border: solid;
+    z-index: 3;
+    background: rgba(255, 255, 255, 1);
+    position: relative;
+}
+.image
+{
+    width: 35%;
+    padding-top: 30px;
+    padding-left: 55px;
+}
+.imgInfo
+{
+    width: 83.65%;
+    padding: 4px 60px 2px 60px;
+    background-color: lightgray;
+    float: left;
+    position: absolute;
+    bottom: 0;
+}
+
+/*Add to Cart button CSS*/
+.btn
+{
+    background: #ffcc4a;
+    background-image: -webkit-linear-gradient(top, #ffcc4a, #d69807);
+    background-image: -moz-linear-gradient(top, #ffcc4a, #d69807);
+    background-image: -ms-linear-gradient(top, #ffcc4a, #d69807);
+    background-image: -o-linear-gradient(top, #ffcc4a, #d69807);
+    background-image: linear-gradient(to bottom, #ffcc4a, #d69807);
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    font-family: Georgia;
+    color: #000000;
+    font-size: 18px;
+    padding: 2px 18px 2px 18px;
+    text-decoration: none;
+    margin: 0 auto;
+}
+
+.btn:hover
+{
+    background: #eba605;
+    background-image: -webkit-linear-gradient(top, #eba605, #e0ac10);
+    background-image: -moz-linear-gradient(top, #eba605, #e0ac10);
+    background-image: -ms-linear-gradient(top, #eba605, #e0ac10);
+    background-image: -o-linear-gradient(top, #eba605, #e0ac10);
+    background-image: linear-gradient(to bottom, #eba605, #e0ac10);
+    text-decoration: none;
+}
+/*End of the Products CSS*/
+
+/* Slider Style */
+.rslides {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.rslides li {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.rslides li:first-child {
+    position: relative;
+    display: block;
+    float: left;
+}
+
+.rslides img {
+    display: block;
+    height: auto;
+    float: left;
+    width: 100%;
+    border: 0;
+}
+
+#slider{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    max-height: 450px;
+    height: auto;
+    overflow: hidden;
+}
+/* END OF SLIDER STYLE */
