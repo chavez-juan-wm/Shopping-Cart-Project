@@ -63,7 +63,8 @@ table
 }
 .imgInfo
 {
-    width: 84.65%;
+    width: 83.65%;
+    display: inherit;
     padding: 4px 60px 2px 60px;
     background-color: lightgray;
     float: left;
