@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>Create an Account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -15,8 +14,9 @@
     <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
 
     <style>
-        .card-container.card {
-            max-width: 450px;
+        .card-container.card
+        {
+            max-width: 43%;
             padding: 40px 40px;
         }
     </style>
@@ -44,28 +44,30 @@
         </ul>
     </div>
 
-    <div class="container">
-        <div class="card card-container">
-            <img id="profile-img" class="profile-img-card" src="https://www.junkfreejune.org.nz/themes/base/production/images/default-profile.png" />
+    <div id = bodyText>
+        <div class="container">
+            <div class="card card-container">
+                <img id="profile-img" class="profile-img-card" src="https://www.junkfreejune.org.nz/themes/base/production/images/default-profile.png" />
 
-            <form class="form-signin">
-                <span id="reauth-email" class="reauth-email"></span>
-                <div style="float: left">
-                    <input type="text" class="form-control, inputEmail" placeholder="First Name" required autofocus>
-                    <input type="text" class="form-control, inputEmail" placeholder="Last Name" required>
-                    <input type="email" class="form-control, inputEmail" placeholder="Email Address" required>
-                </div>
+                <form class="form-signin">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <div style="float: left">
+                        <input type="text" class="form-control, inputEmail" placeholder="First Name" required autofocus>
+                        <input type="text" class="form-control, inputEmail" placeholder="Last Name" required>
+                        <input type="email" class="form-control, inputEmail" placeholder="Email Address" required>
+                    </div>
 
-                <div style="float: right">
-                    <input type="password" class="form-control, inputPassword" placeholder="Password" required>
-                    <input type="password" class="form-control, inputPassword" placeholder="Repeat Password" required>
-                </div>
+                    <div style="float: right">
+                        <input type="password" class="form-control, inputPassword" placeholder="Password" required>
+                        <input type="password" class="form-control, inputPassword" placeholder="Repeat Password" required>
+                    </div>
 
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign Up</button>
-            </form>
-            <!-- /form -->
-        </div><!-- /card-container -->
-    </div><!-- /container -->
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign Up</button>
+                </form>
+                <!-- /form -->
+            </div><!-- /card-container -->
+        </div><!-- /container -->
+    </div>
 </body>
 
 </html>

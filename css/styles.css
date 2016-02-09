@@ -1,3 +1,8 @@
+body
+{
+    margin: 0;
+}
+
 #bodyText
 {
     margin-left: auto;
@@ -5,8 +10,6 @@
     height: auto;
     position: relative;
     z-index: 1;
-    border: solid #333;
-    border-top: none;
 }
 
 /*Start of the Products CSS*/
@@ -61,7 +64,7 @@ table
 }
 .imgInfo
 {
-    width: 84.68%;
+    width: 621px;
     display: inherit;
     padding: 0 60px 0 60px;
     background-color: lightgray;
