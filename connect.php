@@ -8,7 +8,7 @@
 
     try
     {
-        $dbh = new PDO("mysql:host=$hostname;dbname=Shopping_Cart", $username, $password);
+        $dbh = new PDO("mysql:host=$hostname;dbname=shopping_cart", $username, $password);
         // set the PDO error mode to exception
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "Connected successfully";
@@ -18,8 +18,8 @@
         echo "Connection failed: " . $e->getMessage();
     }
 
-    $query = "SELECT Products.productName, Users.firstName, Users.lastName, Users.email, Orders.quantity
-    FROM Orders LEFT JOIN Products on Orders.productId = Products.productId LEFT JOIN Users on Orders.usersId = Users.usersId;";
+    $query = "SELECT products.productName, users.firstName, users.lastName, users.email, orders.quantity
+    FROM orders LEFT JOIN products on orders.productId = products.productId LEFT JOIN users on orders.userId = users.userId;";
 
 
     $stmt = $dbh->prepare($query);
