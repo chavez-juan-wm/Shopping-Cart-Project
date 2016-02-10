@@ -4,7 +4,7 @@
     /*** mysql username ***/
     $username = 'root';
     /*** mysql password ***/
-    $password = 'root';
+    $password = '';
 
     try
     {
@@ -77,8 +77,12 @@
     <style>
         .card-container.card
         {
-            max-width: 40%;
+            max-width: 45%;
             padding: 40px 40px;
+        }
+        input
+        {
+            border-color:
         }
     </style>
 </head>
@@ -88,11 +92,24 @@
     <script>
         $(document).ready(function()
         {
-            $("#work").on('change', function(){
-                alert("It works!");
+            $("#confirm").on('change', function(){
+                if(document.getElementById("password").value != document.getElementById("confirm").value)
+                {
+                    $("#confirm").css("border-color", "red");
+                    $("#password").css("border", "none");
+
+                }
+                else if(document.getElementById("password").value == document.getElementById("confirm").value)
+                {
+                    $("#confirm").css("border-color", "green");
+                    $("#password").css("border-color", "green");
+                }
             });
-            $("#work").on('click', function(){
-                alert("It works!");
+
+            $("button").click(function (event)
+            {
+                if(document.getElementById("password").value != document.getElementById("confirm").value)
+                    event.preventDefault();
             });
         });
     </script>
@@ -132,8 +149,8 @@
                     </div>
 
                     <div style="float: right">
-                        <input type="password" class="form-control, inputPassword" name="password" placeholder="Password" required>
-                        <input type="password" class="form-control, inputPassword" id="work" name="confirmPassword" placeholder="Repeat Password" required>
+                        <input type="password" class="form-control, inputPassword" id="password" name="password" placeholder="Password" required>
+                        <input type="password" class="form-control, inputPassword" id="confirm" name="confirmPassword" placeholder="Repeat Password" required>
                     </div>
 
                     <button type="submit" name="addUser" value="1" class="btn btn-lg btn-primary btn-block btn-signin">Sign Up</button>
