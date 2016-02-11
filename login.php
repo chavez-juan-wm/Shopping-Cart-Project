@@ -1,3 +1,30 @@
+<?php
+    require_once("connect.php");
+
+    if(@$_POST['addUser'])
+    {
+        $email = $_POST['email'];
+
+        echo "Email: " . $_POST['email'];
+        echo "\nPassword: " . $_POST['password'];
+
+    $row = $dbh->prepare('SELECT userId FROM users');
+    $row->execute();
+
+    /* Return number of rows that were counted */
+    $count = $row->rowCount();
+    print("\nCounted $count rows.\n");
+
+
+//        for
+//        $query = "SELECT userId FROM users WHERE $email = 'email', $password = ''";
+
+    }
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +60,7 @@
                     <li class='has-sub'><a href=''><span>Checkout</span></a></li>
                 </ul>
             </li>
-            <li  class="active" style="float: right;"><a href='login.html'><span>Profile</span></a></li>
+            <li  class="active" style="float: right;"><a href='login.php'><span>Profile</span></a></li>
         </ul>
     </div>
 
@@ -41,16 +68,16 @@
         <div class="card card-container">
             <img id="profile-img" class="profile-img-card" src="https://www.junkfreejune.org.nz/themes/base/production/images/default-profile.png" />
 
-            <form class="form-signin">
+            <form name="addUser" method = "post" class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" class="form-control, inputEmail" placeholder="Email address" required autofocus>
-                <input type="password" class="form-control, inputPassword" placeholder="Password" required>
+                <input type="email" class="form-control, inputEmail" name="email" placeholder="Email address" required autofocus>
+                <input type="password" class="form-control, inputPassword" name="password" placeholder="Password" required>
                 <div id="remember" class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+                <button name="addUser" value="1" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
             </form>
             <!-- /form -->
 

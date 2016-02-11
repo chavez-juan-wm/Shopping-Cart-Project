@@ -1,21 +1,5 @@
 <?php
-    /*** mysql hostname ***/
-    $hostname = 'localhost';
-    /*** mysql username ***/
-    $username = 'root';
-    /*** mysql password ***/
-    $password = '';
-
-    try
-    {
-        $dbh = new PDO("mysql:host=$hostname;dbname=shopping_cart", $username, $password);
-        // set the PDO error mode to exception
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-    catch(PDOException $e)
-    {
-        echo "Connection failed: " . $e->getMessage();
-    }
+    require_once("connect.php");
 
     $error = false;
     $success = false;
@@ -53,8 +37,8 @@
     * We'll always want to pull the users to show them in the table
     */
     $stmt = $dbh->prepare('SELECT * FROM users');
-    $stmt->execute();
-    $users = $stmt->fetchAll();
+$stmt->execute();
+$users = $stmt->fetchAll();
 
 ?>
 
@@ -68,7 +52,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
-    <script src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <!-- Files for menu bar -->
     <script src="js/navbar.js" type="text/javascript"></script>
@@ -77,12 +61,13 @@
     <style>
         .card-container.card
         {
-            max-width: 45%;
+            max-width: 40%;
             padding: 40px 40px;
         }
+
         input
         {
-            border-color:
+            border-color: gray;
         }
     </style>
 </head>
@@ -96,7 +81,21 @@
                 if(document.getElementById("password").value != document.getElementById("confirm").value)
                 {
                     $("#confirm").css("border-color", "red");
-                    $("#password").css("border", "none");
+                    $("#password").css("border-color", "none");
+
+                }
+                else if(document.getElementById("password").value == document.getElementById("confirm").value)
+                {
+                    $("#confirm").css("border-color", "green");
+                    $("#password").css("border-color", "green");
+                }
+            });
+
+            $("#password").on('change', function(){
+                if(document.getElementById("password").value != document.getElementById("confirm").value)
+                {
+                    $("#confirm").css("border-color", "red");
+                    $("#password").css("border-color", "none");
 
                 }
                 else if(document.getElementById("password").value == document.getElementById("confirm").value)
@@ -131,7 +130,7 @@
                     <li class='has-sub'><a href=''><span>Checkout</span></a></li>
                 </ul>
             </li>
-            <li  class="active" style="float: right;"><a href='login.html'><span>Profile</span></a></li>
+            <li  class="active" style="float: right;"><a href='login.php'><span>Profile</span></a></li>
         </ul>
     </div>
 
@@ -140,7 +139,7 @@
             <div class="card card-container">
                 <img id="profile-img" class="profile-img-card" src="https://www.junkfreejune.org.nz/themes/base/production/images/default-profile.png" />
 
-                <form name="addUser" id="check" method = "post" class="form-signin">
+                <form name="addUser" method = "post" class="form-signin">
                     <span id="reauth-email" class="reauth-email"></span>
                     <div style="float: left">
                         <input type="text" class="form-control, inputEmail" name="firstName" placeholder="First Name" required autofocus>
