@@ -1,29 +1,63 @@
 <?php
     require_once("connect.php");
 
+    $sql = "SELECT currentUser FROM users WHERE userId = 1";
+    $currentUser = $dbh->prepare($sql);
+    $currentUser -> execute();
+    $currentUser2 = $currentUser->fetch();
+    $currentUser3 = $currentUser2['currentUser'];
+
+    if($currentUser3 == 1)
+    {
+        $check = "No one is signed in.";
+        $sql = "SELECT * FROM users WHERE userId = 1";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+
+        $users = $res->fetchAll();
+    }
+
+    else if($currentUser3 != 1)
+    {
+        $check = "You are currently signed in as: ";
+        $sql = "SELECT * FROM users WHERE userId = $currentUser3";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $users = $res->fetchAll();
+    }
+
     if(@$_POST['addUser'])
     {
         $email = $_POST['email'];
+        $password = $_POST['password'];
 
-        echo "Email: " . $_POST['email'];
-        echo "\nPassword: " . $_POST['password'];
+        $sql = "SELECT * FROM users WHERE email='".$email."' AND password ='".$password."'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
 
-    $row = $dbh->prepare('SELECT userId FROM users');
-    $row->execute();
+        if ($count == 1)
+        {
+            $check = "You have successfully signed in as: ";
+            $currentUser2 = $res->fetch();
+            $currentUser3 = $currentUser2['userId'];
 
-    /* Return number of rows that were counted */
-    $count = $row->rowCount();
-    print("\nCounted $count rows.\n");
+            $sql = "UPDATE `shopping_cart`.`users` SET `currentUser`= $currentUser3 WHERE `userId`='1';";
+            $set = $dbh->prepare($sql);
+            $set -> execute();
 
+            $sql = "SELECT * FROM users WHERE email='".$email."' AND password ='".$password."'";
+            $res = $dbh->prepare($sql);
+            $res -> execute();
+            $users = $res->fetchAll();
+        }
 
-//        for
-//        $query = "SELECT userId FROM users WHERE $email = 'email', $password = ''";
-
+        else
+        {
+            $check = "Something wasn't correct.";
+        }
     }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,5 +124,29 @@
 
         </div><!-- /card-container -->
     </div><!-- /container -->
+
+    <?php echo $check ?>
+
+    <table class="table" align="center">
+        <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </thead>
+
+        <tbody>
+        <?php
+        foreach($users as $user){
+            ?>
+            <tr>
+                <td><?php echo $user['firstName']?></td>
+                <td><?php echo $user['lastName']?></td>
+                <td><?php echo $user['email']?></td>
+            </tr>
+            <?php
+        }
+        ?>
+        </tbody>
+    </table>
 </body>
 </html>

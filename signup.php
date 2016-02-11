@@ -36,7 +36,7 @@
     /**
     * We'll always want to pull the users to show them in the table
     */
-    $stmt = $dbh->prepare('SELECT * FROM users');
+$stmt = $dbh->prepare('SELECT * FROM users');
 $stmt->execute();
 $users = $stmt->fetchAll();
 
@@ -141,13 +141,13 @@ $users = $stmt->fetchAll();
 
                 <form name="addUser" method = "post" class="form-signin">
                     <span id="reauth-email" class="reauth-email"></span>
-                    <div style="float: left">
+                    <div style="width: 50%; float: left; padding-right: 2%">
                         <input type="text" class="form-control, inputEmail" name="firstName" placeholder="First Name" required autofocus>
                         <input type="text" class="form-control, inputEmail" name="lastName" placeholder="Last Name" required>
                         <input type="email" class="form-control, inputEmail" name="email" placeholder="Email Address" required>
                     </div>
 
-                    <div style="float: right">
+                    <div style="width: 50%; float: left">
                         <input type="password" class="form-control, inputPassword" id="password" name="password" placeholder="Password" required>
                         <input type="password" class="form-control, inputPassword" id="confirm" name="confirmPassword" placeholder="Repeat Password" required>
                     </div>
