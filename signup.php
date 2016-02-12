@@ -123,10 +123,10 @@ $users = $stmt->fetchAll();
                     <li class='has-sub'><a href=''><span>Frequently Asked Questions</span></a></li>
                 </ul>
             </li>
-            <li><a href='products.html'><span>Products</span></a></li>
+            <li><a href='products.php'><span>Products</span></a></li>
             <li><a href='#'><span>Cart</span></a>
                 <ul>
-                    <li class='has-sub'><a href='cart.html'><span>Shopping Cart</span></a></li>
+                    <li class='has-sub'><a href='cart.php'><span>Shopping Cart</span></a></li>
                     <li class='has-sub'><a href=''><span>Checkout</span></a></li>
                 </ul>
             </li>

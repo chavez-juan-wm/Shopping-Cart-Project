@@ -1,3 +1,187 @@
+<?php
+    require_once("connect.php");
+
+    $sql = "SELECT currentUser FROM users WHERE userId = 1";
+    $currentUser = $dbh->prepare($sql);
+    $currentUser -> execute();
+    $currentUser2 = $currentUser->fetch();
+    $currentUser3 = $currentUser2['currentUser'];
+    $check = "something";
+
+    if(@$_POST['product1'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='1'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product1";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('1', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+
+    if(@$_POST['product2'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='2'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product2";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('2', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+
+    if(@$_POST['product3'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='3'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product3";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('3', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+
+    if(@$_POST['product4'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='4'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product4";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('4', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+
+    if(@$_POST['product5'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='5'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product5";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('5', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+
+    if(@$_POST['product6'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='6'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product6";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('6', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+
+    if(@$_POST['product7'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='7'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product7";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('7', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+
+    if(@$_POST['product8'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='8'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product8";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('8', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+
+    if(@$_POST['product9'])
+    {
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='9'";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $count = $res->rowCount();
+
+        if($count == 0)
+        {
+            $check = "product9";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('9', '$currentUser3', '1');";
+            $stmt = $dbh -> prepare($sql);
+            $result = $stmt -> execute();
+        }
+        else
+            $check = "It's already in there";
+
+    }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +189,7 @@
     <meta charset="UTF-8">
     <title>Products</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <script src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <!-- Files for menu bar -->
     <script src="js/navbar.js" type="text/javascript"></script>
@@ -91,10 +275,10 @@
                 <li class='has-sub'><a href=''><span>Frequently Asked Questions</span></a></li>
             </ul>
         </li>
-        <li class="active"><a href='products.html'><span>Products</span></a></li>
+        <li class="active"><a href='products.php'><span>Products</span></a></li>
         <li><a href='#'><span>Cart</span></a>
             <ul>
-                <li class='has-sub'><a href='cart.html'><span>Shopping Cart</span></a></li>
+                <li class='has-sub'><a href='cart.php'><span>Shopping Cart</span></a></li>
                 <li class='has-sub'><a href=''><span>Checkout</span></a></li>
             </ul>
         </li>
@@ -120,7 +304,9 @@
                         <h2 style="text-align: center">Exploding Kittens</h2>
                         <h3 style="text-align: center">$20.00</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product1" method="post">
+                                <button class="btn" type="submit" name="product1" value="1">Add to Cart</button>
+                            </form>
                         </div>
 
                     </div>
@@ -149,7 +335,9 @@
                         <h2 style="text-align: center">Monopoly</h2>
                         <h3 style="text-align: center">$17.99</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product2" method="post">
+                                <button class="btn" type="submit" name="product2" value="1">Add to Cart</button>
+                            </form>
                         </div>
 
                     </div>
@@ -178,7 +366,9 @@
                         <h2 style="text-align: center">The Game of Life</h2>
                         <h3 style="text-align: center">$21.99</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product3" method="post">
+                                <button class="btn" type="submit" name="product3" value="1">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
 
@@ -206,7 +396,9 @@
                         <h2 style="text-align: center">Candy Land</h2>
                         <h3 style="text-align: center">$12.99</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product4" method="post">
+                                <button class="btn" type="submit" name="product4" value="1">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
 
@@ -232,7 +424,9 @@
                         <h2 style="text-align: center">Checkers</h2>
                         <h3 style="text-align: center">$18.34</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product5" method="post">
+                                <button class="btn" type="submit" name="product5" value="1">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
 
@@ -258,7 +452,9 @@
                         <h2 style="text-align: center">Apples to Apples Party Box</h2>
                         <h3 style="text-align: center">$19.99</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product6" method="post">
+                                <button class="btn" type="submit" name="product6" value="1">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
 
@@ -286,7 +482,9 @@
                         <h2 style="text-align: center">Uno</h2>
                         <h3 style="text-align: center">$9.99</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product7" method="post">
+                                <button class="btn" type="submit" name="product7" value="1">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
 
@@ -314,7 +512,9 @@
                         <h2 style="text-align: center">Bicycle Rider Playing Cards</h2>
                         <h3 style="text-align: center">$3.99</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product8" method="post">
+                                <button class="btn" type="submit" name="product8" value="1">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
 
@@ -340,7 +540,9 @@
                         <h2 style="text-align: center">Sorry</h2>
                         <h3 style="text-align: center">$19.99</h3>
                         <div style="text-align: center">
-                            <button class="btn">Add to Cart</button>
+                            <form name="product9" method="post">
+                                <button class="btn" type="submit" name="product9" value="1">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
 
@@ -357,6 +559,7 @@
         </div>
 
         <table align="center">
+            <?php echo $check ?>
             <tr>
                 <td><img id= "img1" src="pics/exploding_kittens.png" style="cursor: pointer"></td>
                 <td><img id= "img2" src="pics/monopoly.jpg" style="cursor: pointer"></td>

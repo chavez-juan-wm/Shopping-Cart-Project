@@ -68,7 +68,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
-    <script src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
     <!-- Files for menu bar -->
@@ -87,10 +87,10 @@
                     <li class='has-sub'><a href=''><span>Frequently Asked Questions</span></a></li>
                 </ul>
             </li>
-            <li><a href='products.html'><span>Products</span></a></li>
+            <li><a href='products.php'><span>Products</span></a></li>
             <li><a href='#'><span>Cart</span></a>
                 <ul>
-                    <li class='has-sub'><a href='cart.html'><span>Shopping Cart</span></a></li>
+                    <li class='has-sub'><a href='cart.php'><span>Shopping Cart</span></a></li>
                     <li class='has-sub'><a href=''><span>Checkout</span></a></li>
                 </ul>
             </li>
