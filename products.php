@@ -6,7 +6,6 @@
     $currentUser -> execute();
     $currentUser2 = $currentUser->fetch();
     $currentUser3 = $currentUser2['currentUser'];
-    $check = "something";
 
     if(@$_POST['product1'])
     {
@@ -17,14 +16,12 @@
 
         if($count == 0)
         {
-            $check = "product1";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('1', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        else
-            $check = "It's already in there";
 
+        header("Location: cart.php");
     }
 
     if(@$_POST['product2'])
@@ -36,14 +33,12 @@
 
         if($count == 0)
         {
-            $check = "product2";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('2', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        else
-            $check = "It's already in there";
 
+        header("Location: cart.php");
     }
 
     if(@$_POST['product3'])
@@ -55,14 +50,12 @@
 
         if($count == 0)
         {
-            $check = "product3";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('3', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        else
-            $check = "It's already in there";
 
+        header("Location: cart.php");
     }
 
     if(@$_POST['product4'])
@@ -74,14 +67,12 @@
 
         if($count == 0)
         {
-            $check = "product4";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('4', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        else
-            $check = "It's already in there";
 
+        header("Location: cart.php");
     }
 
     if(@$_POST['product5'])
@@ -93,14 +84,12 @@
 
         if($count == 0)
         {
-            $check = "product5";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('5', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        else
-            $check = "It's already in there";
 
+        header("Location: cart.php");
     }
 
     if(@$_POST['product6'])
@@ -112,14 +101,12 @@
 
         if($count == 0)
         {
-            $check = "product6";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('6', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        else
-            $check = "It's already in there";
 
+        header("Location: cart.php");
     }
 
     if(@$_POST['product7'])
@@ -131,14 +118,12 @@
 
         if($count == 0)
         {
-            $check = "product7";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('7', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        else
-            $check = "It's already in there";
 
+        header("Location: cart.php");
     }
 
     if(@$_POST['product8'])
@@ -150,14 +135,12 @@
 
         if($count == 0)
         {
-            $check = "product8";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('8', '$currentUser3', '1');";
-            $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
+            $stmt = $dbh->prepare($sql);
+            $result = $stmt->execute();
         }
-        else
-            $check = "It's already in there";
 
+            header("Location: cart.php");
     }
 
     if(@$_POST['product9'])
@@ -169,14 +152,12 @@
 
         if($count == 0)
         {
-            $check = "product9";
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('9', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        else
-            $check = "It's already in there";
 
+        header("Location: cart.php");
     }
 ?>
 
@@ -559,7 +540,6 @@
         </div>
 
         <table align="center">
-            <?php echo $check ?>
             <tr>
                 <td><img id= "img1" src="pics/exploding_kittens.png" style="cursor: pointer"></td>
                 <td><img id= "img2" src="pics/monopoly.jpg" style="cursor: pointer"></td>
