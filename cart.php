@@ -1,5 +1,4 @@
 <?php
-
     require_once("connect.php");
 
     $sql = "SELECT currentUser FROM users WHERE userId = 1";
@@ -8,14 +7,13 @@
     $currentUser2 = $currentUser->fetch();
     $currentUser3 = $currentUser2['currentUser'];
 
-    $query = "SELECT products.productName, orders.quantity
-    FROM orders LEFT JOIN products on orders.productId = products.productId AND userId = '$currentUser3'";
+    $query = "SELECT products.productName, products.productLink, products.productPrice, orders.quantity
+    FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = '$currentUser3'";
 
     $stmt = $dbh->prepare($query);
     $stmt->execute();
     $users = $stmt->fetchAll();
 ?>
-
 
 
 <!DOCTYPE html>
@@ -30,7 +28,13 @@
     <script src="js/navbar.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <style>
+        img
+        {
+            width: 140px;
+            height: 110px;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,27 +59,22 @@
     </ul>
 </div>
 
-<script>
-    function clean()
-    {
-        $("#body tr").remove();
-    }
-</script>
-
 <div id = bodyText>
+    <h2>Shopping Cart</h2>
     <table class="table" align="center">
         <thead>
-            <th>Product Name</th>
+            <th>Product</th>
             <th>Quantity</th>
+            <th>Price</th>
         </thead>
-
-        <tbody id="body">
+        <tbody>
         <?php
             foreach($users as $user){
         ?>
         <tr>
-            <td><?php echo $user['productName']?></td>
+            <td><img style="float: left" src= "<?php echo $user['productLink']?> " /> <h4 style="float: left; padding-left: 12px"><?php echo $user['productName']?></h4></td>
             <td><?php echo $user['quantity']?></td>
+            <td><h5 style="color: red">$<?php echo $user['quantity'] * $user['productPrice']?></h5></td>
         </tr>
                 <?php
             }
