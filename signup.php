@@ -30,13 +30,15 @@
             {
                 $success = "There was an error saving " . $_POST['firstName'];
             }
+
+            header("Location: login.php");
         }
     }
 
     /**
     * We'll always want to pull the users to show them in the table
     */
-$stmt = $dbh->prepare('SELECT * FROM users');
+$stmt = $dbh->prepare('SELECT * FROM users WHERE userId != 1');
 $stmt->execute();
 $users = $stmt->fetchAll();
 
@@ -64,11 +66,6 @@ $users = $stmt->fetchAll();
             max-width: 40%;
             padding: 40px 40px;
         }
-
-        input
-        {
-            border-color: gray;
-        }
     </style>
 </head>
 
@@ -81,7 +78,7 @@ $users = $stmt->fetchAll();
                 if(document.getElementById("password").value != document.getElementById("confirm").value)
                 {
                     $("#confirm").css("border-color", "red");
-                    $("#password").css("border-color", "none");
+                    $("#password").css("border-color", "gray");
 
                 }
                 else if(document.getElementById("password").value == document.getElementById("confirm").value)
@@ -95,7 +92,7 @@ $users = $stmt->fetchAll();
                 if(document.getElementById("password").value != document.getElementById("confirm").value)
                 {
                     $("#confirm").css("border-color", "red");
-                    $("#password").css("border-color", "none");
+                    $("#password").css("border-color", "gray");
 
                 }
                 else if(document.getElementById("password").value == document.getElementById("confirm").value)
@@ -118,19 +115,13 @@ $users = $stmt->fetchAll();
             <li><a href='index.html'><span>Home</span></a></li>
             <li><a href='#'><span>About</span></a>
                 <ul>
-                    <li class='has-sub'><a href=''><span>About Us</span></a></li>
-                    <li class='has-sub'><a href=''><span>Contact Info</span></a></li>
-                    <li class='has-sub'><a href=''><span>Frequently Asked Questions</span></a></li>
+                    <li class='has-sub'><a href='aboutUs.html'><span>About Us</span></a></li>
+                    <li class='has-sub'><a href='FAQ.html'><span>Frequently Asked Questions</span></a></li>
                 </ul>
             </li>
             <li><a href='products.php'><span>Products</span></a></li>
-            <li><a href='#'><span>Cart</span></a>
-                <ul>
-                    <li class='has-sub'><a href='cart.php'><span>Shopping Cart</span></a></li>
-                    <li class='has-sub'><a href=''><span>Checkout</span></a></li>
-                </ul>
-            </li>
-            <li  class="active" style="float: right;"><a href='login.php'><span>Profile</span></a></li>
+            <li><a href='cart.php'><span>Cart</span></a></li>
+            <li class="active" style="float: right;"><a href='login.php'><span>Profile</span></a></li>
         </ul>
     </div>
 
@@ -155,6 +146,10 @@ $users = $stmt->fetchAll();
                     <button type="submit" name="addUser" value="1" class="btn btn-lg btn-primary btn-block btn-signin">Sign Up</button>
                 </form>
                 <!-- /form -->
+
+                <a href="login.php" class="forgot-password">
+                    <p style="margin-bottom: 0">Already have an account? Sign in</p>
+                </a>
             </div><!-- /card-container -->
         </div><!-- /container -->
 
@@ -180,7 +175,6 @@ $users = $stmt->fetchAll();
 
         <table class="table" align="center">
             <thead>
-                <th>User Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
@@ -192,7 +186,6 @@ $users = $stmt->fetchAll();
             foreach($users as $user){
                 ?>
                 <tr>
-                    <td><?php echo $user['userId']?></td>
                     <td><?php echo $user['firstName']?></td>
                     <td><?php echo $user['lastName']?></td>
                     <td><?php echo $user['email']?></td>

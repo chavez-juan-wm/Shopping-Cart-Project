@@ -2,19 +2,26 @@
     require_once("connect.php");
 
     $total = 0;
+    $items = "";
 
-$sql = "SELECT currentUser FROM users WHERE userId = 1";
+    $sql = "SELECT currentUser FROM users WHERE userId = 1";
     $currentUser = $dbh->prepare($sql);
     $currentUser -> execute();
     $currentUser2 = $currentUser->fetch();
     $currentUser3 = $currentUser2['currentUser'];
 
     $query = "SELECT products.productName, products.productLink, products.productPrice, products.productId, orders.quantity
-    FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = '$currentUser3'";
+            FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = '$currentUser3'";
 
     $stmt = $dbh->prepare($query);
     $stmt->execute();
     $users = $stmt->fetchAll();
+    $count = $stmt->rowCount();
+
+    if($count == 0)
+        $items = "You currently have no items in you cart.";
+    else
+        $items = "";
 
     if(@$_POST['product1'])
     {
@@ -263,24 +270,20 @@ $sql = "SELECT currentUser FROM users WHERE userId = 1";
         <li><a href='index.html'><span>Home</span></a></li>
         <li><a href='#'><span>About</span></a>
             <ul>
-                <li class='has-sub'><a href=''><span>About Us</span></a></li>
-                <li class='has-sub'><a href=''><span>Contact Info</span></a></li>
-                <li class='has-sub'><a href=''><span>Frequently Asked Questions</span></a></li>
+                <li class='has-sub'><a href='aboutUs.html'><span>About Us</span></a></li>
+                <li class='has-sub'><a href='FAQ.html'><span>Frequently Asked Questions</span></a></li>
             </ul>
         </li>
         <li><a href='products.php'><span>Products</span></a></li>
-        <li class="active"><a href='#'><span>Cart</span></a>
-            <ul>
-                <li class='has-sub'><a href='cart.php'><span>Shopping Cart</span></a></li>
-                <li class='has-sub'><a href=''><span>Checkout</span></a></li>
-            </ul>
-        </li>
+        <li class="active"><a href='cart.php'><span>Cart</span></a></li>
         <li style="float: right;"><a href='login.php'><span>Profile</span></a></li>
     </ul>
 </div>
 
 <div id = bodyText>
     <h2>Shopping Cart</h2>
+
+    <?php echo $items ?>
     <table class="table" align="center">
         <thead>
             <th>Product</th>
@@ -318,7 +321,14 @@ $sql = "SELECT currentUser FROM users WHERE userId = 1";
         </tbody>
     </table>
 
-    <h4 style="float: right; padding-right: 30px; margin-top: 2px">Total: $<?=$total?></h4>
+    <h4 style="float: right; padding-right: 50px; margin-top: 2px">Total: $<?=$total?></h4>
+
+    <form style="padding-left: 10px; float: left" action="products.php">
+        <input type="submit" value="Continue Shopping">
+    </form>
+    <form style="padding-left: 10px; float: left" action="#">
+        <input type="submit" value="Checkout">
+    </form>
 </div>
 </body>
 </html>

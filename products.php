@@ -257,12 +257,7 @@
             </ul>
         </li>
         <li class="active"><a href='products.php'><span>Products</span></a></li>
-        <li><a href='#'><span>Cart</span></a>
-            <ul>
-                <li class='has-sub'><a href='cart.php'><span>Shopping Cart</span></a></li>
-                <li class='has-sub'><a href=''><span>Checkout</span></a></li>
-            </ul>
-        </li>
+        <li><a href='cart.php'><span>Cart</span></a></li>
         <li style="float: right;"><a href='login.php'><span>Profile</span></a></li>
     </ul>
 </div>

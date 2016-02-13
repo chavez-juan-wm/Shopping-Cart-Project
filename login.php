@@ -6,6 +6,7 @@
     $currentUser -> execute();
     $currentUser2 = $currentUser->fetch();
     $currentUser3 = $currentUser2['currentUser'];
+    $logout = '';
 
     if($currentUser3 == 1)
     {
@@ -19,6 +20,9 @@
 
     else if($currentUser3 != 1)
     {
+        $logout = "<form method='post' name='logout'>
+                    <td><button class='link' type='submit' name='logout' value='1'>Log Out</button></td>
+                </form>";
         $check = "You are currently signed in as: ";
         $sql = "SELECT * FROM users WHERE userId = $currentUser3";
         $res = $dbh->prepare($sql);
@@ -38,6 +42,9 @@
 
         if ($count == 1)
         {
+            $logout = "<form method='post' name='logout'>
+                    <td><button class='link' type='submit' name='logout' value='1'>Log Out</button></td>
+                </form>";
             $check = "You have successfully signed in as: ";
             $currentUser2 = $res->fetch();
             $currentUser3 = $currentUser2['userId'];
@@ -57,6 +64,21 @@
             $check = "Something wasn't correct.";
         }
     }
+
+    if(@$_POST['logout'])
+    {
+        $logout = '';
+        $check = "You have successfully signed out ";
+
+        $sql = "UPDATE `shopping_cart`.`users` SET `currentUser`= '1' WHERE `userId`='1';";
+        $set = $dbh->prepare($sql);
+        $set -> execute();
+
+        $sql = "SELECT * FROM users WHERE userId = 1";
+        $res = $dbh->prepare($sql);
+        $res -> execute();
+        $users = $res->fetchAll();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -74,6 +96,20 @@
     <!-- Files for menu bar -->
     <script src="js/navbar.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
+
+    <style>
+        .link
+        {
+            color: dodgerblue;
+            background:none!important;
+            border:none;
+            padding:0!important;
+            font: inherit;
+            /*border is optional*/
+            cursor: pointer;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -82,19 +118,13 @@
             <li><a href='index.html'><span>Home</span></a></li>
             <li><a href='#'><span>About</span></a>
                 <ul>
-                    <li class='has-sub'><a href=''><span>About Us</span></a></li>
-                    <li class='has-sub'><a href=''><span>Contact Info</span></a></li>
-                    <li class='has-sub'><a href=''><span>Frequently Asked Questions</span></a></li>
+                    <li class='has-sub'><a href='aboutUs.html'><span>About Us</span></a></li>
+                    <li class='has-sub'><a href='FAQ.html'><span>Frequently Asked Questions</span></a></li>
                 </ul>
             </li>
             <li><a href='products.php'><span>Products</span></a></li>
-            <li><a href='#'><span>Cart</span></a>
-                <ul>
-                    <li class='has-sub'><a href='cart.php'><span>Shopping Cart</span></a></li>
-                    <li class='has-sub'><a href=''><span>Checkout</span></a></li>
-                </ul>
-            </li>
-            <li  class="active" style="float: right;"><a href='login.php'><span>Profile</span></a></li>
+            <li><a href='cart.php'><span>Cart</span></a></li>
+            <li class="active" style="float: right;"><a href='login.php'><span>Profile</span></a></li>
         </ul>
     </div>
 
@@ -106,18 +136,12 @@
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="email" class="form-control, inputEmail" name="email" placeholder="Email address" required autofocus>
                 <input type="password" class="form-control, inputPassword" name="password" placeholder="Password" required>
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
+
                 <button name="addUser" value="1" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
             </form>
             <!-- /form -->
 
-            <a href="#" class="forgot-password">
-                Forgot the password?
-            </a>
+
             <a href="signup.php" class="forgot-password">
                 <p style="margin-bottom: 0">New? Create an Account</p>
             </a>
@@ -132,6 +156,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Log Out</th>
         </thead>
 
         <tbody>
@@ -142,6 +167,10 @@
                 <td><?php echo $user['firstName']?></td>
                 <td><?php echo $user['lastName']?></td>
                 <td><?php echo $user['email']?></td>
+
+                <?php echo $logout ?>
+
+
             </tr>
             <?php
         }
