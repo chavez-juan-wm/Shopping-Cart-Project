@@ -1,11 +1,6 @@
 <?php
     require_once("connect.php");
 
-    $sql = "SELECT currentUser FROM users WHERE userId = 1";
-    $currentUser = $dbh->prepare($sql);
-    $currentUser -> execute();
-    $currentUser2 = $currentUser->fetch();
-    $currentUser3 = $currentUser2['currentUser'];
     $logout = '';
 
     if($currentUser3 == 1)
@@ -21,7 +16,7 @@
     else if($currentUser3 != 1)
     {
         $logout = "<form method='post' name='logout'>
-                    <td><button class='link' type='submit' name='logout' value='1'>Log Out</button></td>
+                    <td><button class='btn-primary' type='submit' name='logout' value='1'>Log Out</button></td>
                 </form>";
         $check = "You are currently signed in as: ";
         $sql = "SELECT * FROM users WHERE userId = $currentUser3";
@@ -43,7 +38,7 @@
         if ($count == 1)
         {
             $logout = "<form method='post' name='logout'>
-                    <td><button class='link' type='submit' name='logout' value='1'>Log Out</button></td>
+                    <td><button class='btn-primary' type='submit' name='logout' value='1'>Log Out</button></td>
                 </form>";
             $check = "You have successfully signed in as: ";
             $currentUser2 = $res->fetch();
@@ -149,7 +144,7 @@
         </div><!-- /card-container -->
     </div><!-- /container -->
 
-    <?php echo $check ?>
+    <p style="padding-left: 7px"><?php echo $check ?></p>
 
     <table class="table" align="center">
         <thead>

@@ -1,167 +1,26 @@
 <?php
     require_once("connect.php");
 
-    $sql = "SELECT currentUser FROM users WHERE userId = 1";
-    $currentUser = $dbh->prepare($sql);
-    $currentUser -> execute();
-    $currentUser2 = $currentUser->fetch();
-    $currentUser3 = $currentUser2['currentUser'];
-
-    if(@$_POST['product1'])
+    if(@$_POST['addProduct'])
     {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='1'";
+        $productId = $_POST['addProduct'];
+
+        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='".$productId."'";
         $res = $dbh->prepare($sql);
         $res -> execute();
         $count = $res->rowCount();
 
         if($count == 0)
         {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('1', '$currentUser3', '1');";
+            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('".$productId."', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-
-        header("Location: cart.php");
-    }
-
-    if(@$_POST['product2'])
-    {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='2'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-        $count = $res->rowCount();
-
-        if($count == 0)
-        {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('2', '$currentUser3', '1');";
-            $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
-        }
-
-        header("Location: cart.php");
-    }
-
-    if(@$_POST['product3'])
-    {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='3'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-        $count = $res->rowCount();
-
-        if($count == 0)
-        {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('3', '$currentUser3', '1');";
-            $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
-        }
-
-        header("Location: cart.php");
-    }
-
-    if(@$_POST['product4'])
-    {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='4'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-        $count = $res->rowCount();
-
-        if($count == 0)
-        {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('4', '$currentUser3', '1');";
-            $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
-        }
-
-        header("Location: cart.php");
-    }
-
-    if(@$_POST['product5'])
-    {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='5'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-        $count = $res->rowCount();
-
-        if($count == 0)
-        {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('5', '$currentUser3', '1');";
-            $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
-        }
-
-        header("Location: cart.php");
-    }
-
-    if(@$_POST['product6'])
-    {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='6'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-        $count = $res->rowCount();
-
-        if($count == 0)
-        {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('6', '$currentUser3', '1');";
-            $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
-        }
-
-        header("Location: cart.php");
-    }
-
-    if(@$_POST['product7'])
-    {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='7'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-        $count = $res->rowCount();
-
-        if($count == 0)
-        {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('7', '$currentUser3', '1');";
-            $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
-        }
-
-        header("Location: cart.php");
-    }
-
-    if(@$_POST['product8'])
-    {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='8'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-        $count = $res->rowCount();
-
-        if($count == 0)
-        {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('8', '$currentUser3', '1');";
-            $stmt = $dbh->prepare($sql);
-            $result = $stmt->execute();
-        }
-
-            header("Location: cart.php");
-    }
-
-    if(@$_POST['product9'])
-    {
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='9'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-        $count = $res->rowCount();
-
-        if($count == 0)
-        {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('9', '$currentUser3', '1');";
-            $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
-        }
-
-        header("Location: cart.php");
+        echo "<script>
+        window.location.href = 'cart.php';
+    </script>";
     }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -189,7 +48,6 @@
 
 <script>
     $(document).ready(function(){
-
 
         $(".close").click(function(){
             $(".secondDiv").fadeOut(400);
@@ -252,7 +110,6 @@
         <li><a href='#'><span>About</span></a>
             <ul>
                 <li class='has-sub'><a href=''><span>About Us</span></a></li>
-                <li class='has-sub'><a href=''><span>Contact Info</span></a></li>
                 <li class='has-sub'><a href=''><span>Frequently Asked Questions</span></a></li>
             </ul>
         </li>
@@ -280,8 +137,8 @@
                         <h2 style="text-align: center">Exploding Kittens</h2>
                         <h3 style="text-align: center">$20.00</h3>
                         <div style="text-align: center">
-                            <form name="product1" method="post">
-                                <button class="btn" type="submit" name="product1" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="1">Add to Cart</button>
                             </form>
                         </div>
 
@@ -311,8 +168,8 @@
                         <h2 style="text-align: center">Monopoly</h2>
                         <h3 style="text-align: center">$17.99</h3>
                         <div style="text-align: center">
-                            <form name="product2" method="post">
-                                <button class="btn" type="submit" name="product2" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="2">Add to Cart</button>
                             </form>
                         </div>
 
@@ -320,7 +177,7 @@
 
                     <div class="imgInfo">
                         <ul>
-                            <li>Monopoly is the fast-dealing property trading game that your will have the whole family buying, selling and having a blast.</li>
+                            <li>Monopoly is the fast-dealing property trading game that will have the whole family buying, selling and having a blast.</li>
                             <li>Featuring a speed die for a faster, more intense game of Monopoly.</li>
                             <li>For 2 to 8 players.</li>
                             <li>Includes gameboard, 8 tokens, 28 Title Deed cards, 16 Chance cards.</li>
@@ -342,8 +199,8 @@
                         <h2 style="text-align: center">The Game of Life</h2>
                         <h3 style="text-align: center">$21.99</h3>
                         <div style="text-align: center">
-                            <form name="product3" method="post">
-                                <button class="btn" type="submit" name="product3" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="3">Add to Cart</button>
                             </form>
                         </div>
                     </div>
@@ -372,8 +229,8 @@
                         <h2 style="text-align: center">Candy Land</h2>
                         <h3 style="text-align: center">$12.99</h3>
                         <div style="text-align: center">
-                            <form name="product4" method="post">
-                                <button class="btn" type="submit" name="product4" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="4">Add to Cart</button>
                             </form>
                         </div>
                     </div>
@@ -400,8 +257,8 @@
                         <h2 style="text-align: center">Checkers</h2>
                         <h3 style="text-align: center">$18.34</h3>
                         <div style="text-align: center">
-                            <form name="product5" method="post">
-                                <button class="btn" type="submit" name="product5" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="5">Add to Cart</button>
                             </form>
                         </div>
                     </div>
@@ -428,8 +285,8 @@
                         <h2 style="text-align: center">Apples to Apples Party Box</h2>
                         <h3 style="text-align: center">$19.99</h3>
                         <div style="text-align: center">
-                            <form name="product6" method="post">
-                                <button class="btn" type="submit" name="product6" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="6">Add to Cart</button>
                             </form>
                         </div>
                     </div>
@@ -458,8 +315,8 @@
                         <h2 style="text-align: center">Uno</h2>
                         <h3 style="text-align: center">$9.99</h3>
                         <div style="text-align: center">
-                            <form name="product7" method="post">
-                                <button class="btn" type="submit" name="product7" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="7">Add to Cart</button>
                             </form>
                         </div>
                     </div>
@@ -488,8 +345,8 @@
                         <h2 style="text-align: center">Bicycle Rider Playing Cards</h2>
                         <h3 style="text-align: center">$3.99</h3>
                         <div style="text-align: center">
-                            <form name="product8" method="post">
-                                <button class="btn" type="submit" name="product8" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="8">Add to Cart</button>
                             </form>
                         </div>
                     </div>
@@ -516,8 +373,8 @@
                         <h2 style="text-align: center">Sorry</h2>
                         <h3 style="text-align: center">$19.99</h3>
                         <div style="text-align: center">
-                            <form name="product9" method="post">
-                                <button class="btn" type="submit" name="product9" value="1">Add to Cart</button>
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="9">Add to Cart</button>
                             </form>
                         </div>
                     </div>

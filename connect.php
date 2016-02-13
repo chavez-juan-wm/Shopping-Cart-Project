@@ -4,7 +4,7 @@
     /*** mysql username ***/
     $username = 'root';
     /*** mysql password ***/
-    $password = 'root';
+    $password = '';
 
     try
     {
@@ -16,4 +16,10 @@
     {
         echo "Connection failed: " . $e->getMessage();
     }
-?>
+
+
+    $sql = "SELECT currentUser FROM users WHERE userId = 1";
+    $currentUser = $dbh->prepare($sql);
+    $currentUser -> execute();
+    $currentUser2 = $currentUser->fetch();
+    $currentUser3 = $currentUser2['currentUser'];

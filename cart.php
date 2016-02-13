@@ -4,12 +4,6 @@
     $total = 0;
     $items = "";
 
-    $sql = "SELECT currentUser FROM users WHERE userId = 1";
-    $currentUser = $dbh->prepare($sql);
-    $currentUser -> execute();
-    $currentUser2 = $currentUser->fetch();
-    $currentUser3 = $currentUser2['currentUser'];
-
     $query = "SELECT products.productName, products.productLink, products.productPrice, products.productId, orders.quantity
             FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = '$currentUser3'";
 
@@ -23,10 +17,11 @@
     else
         $items = "";
 
-    if(@$_POST['product1'])
+    if(@$_POST['product'])
     {
-        $quantity = $_POST['quantity1'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='1'";
+        $productId = $_POST['product'];
+        $quantity = $_POST['quantity'];
+        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='".$productId."'";
         $res = $dbh->prepare($sql);
         $res -> execute();
 
@@ -35,193 +30,10 @@
         $users = $stmt->fetchAll();
     }
 
-    if(@$_POST['product2'])
+    if(@$_POST['delete'])
     {
-        $quantity = $_POST['quantity2'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='2'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['product3'])
-    {
-        $quantity = $_POST['quantity3'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='3'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['product4'])
-    {
-        $quantity = $_POST['quantity4'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='4'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['product5'])
-    {
-        $quantity = $_POST['quantity5'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='5'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['product6'])
-    {
-        $quantity = $_POST['quantity6'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='6'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['product7'])
-    {
-        $quantity = $_POST['quantity7'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='7'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['product8'])
-    {
-        $quantity = $_POST['quantity8'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='8'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['product9'])
-    {
-        $quantity = $_POST['quantity9'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='9'";
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete1'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '1'";;
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete2'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '2'";;
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete3'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '3'";;
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete4'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '4'";;
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete5'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '5'";;
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete6'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '6'";;
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete7'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '7'";;
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete8'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '8'";;
-        $res = $dbh->prepare($sql);
-        $res -> execute();
-
-        $stmt = $dbh->prepare($query);
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-    }
-
-    if(@$_POST['delete9'])
-    {
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '9'";;
+        $productId = $_POST['delete'];
+        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '".$productId."'";;
         $res = $dbh->prepare($sql);
         $res -> execute();
 
@@ -265,6 +77,15 @@
 
 <body>
 
+<script>
+    function changePage(page)
+    {
+        if(page == 1)
+            return  window.location.href = "products.php";
+        else if (page == 2)
+            return  window.location.href = "index.html";
+    }
+</script>
 <div style="z-index: 10" id='cssmenu'>
     <ul>
         <li><a href='index.html'><span>Home</span></a></li>
@@ -302,15 +123,15 @@
 
                 <div style="float: left; padding-left: 12px">
                     <h4><?php echo $user['productName']?></h4>
-                    <form method="post" name="delete<?= $user["productId"] ?>">
-                        <button class="link" type="submit" name="delete<?= $user["productId"] ?>" value="1">Delete</button>
+                    <form method="post" name="delete">
+                        <button class="link" type="submit" name="delete" value="<?= $user["productId"] ?>">Delete</button>
                     </form>
                 </div>
             </td>
             <td>
-                <form method="post" name="product<?= $user["productId"] ?>">
-                    <input style="width: 8%" type="text" name="quantity<?= $user["productId"] ?>" value="<?= $user["quantity"] ?>">&nbsp;
-                    <button type="submit" name="product<?= $user["productId"] ?>" value="1">Update</button>
+                <form method="post" name="product">
+                    <input style="width: 8%" type="text" name="quantity" value="<?= $user["quantity"] ?>">&nbsp;
+                    <button class="btn-info" type="submit" name=product value="<?= $user["productId"] ?>">Update</button>
                 </form>
             </td>
             <td><h4 style="color: orangered">$<?php $total += $user['quantity'] * $user['productPrice']; echo $user['quantity'] * $user['productPrice'];?></h4></td>
@@ -323,12 +144,12 @@
 
     <h4 style="float: right; padding-right: 50px; margin-top: 2px">Total: $<?=$total?></h4>
 
-    <form style="padding-left: 10px; float: left" action="products.php">
-        <input type="submit" value="Continue Shopping">
-    </form>
-    <form style="padding-left: 10px; float: left" action="#">
-        <input type="submit" value="Checkout">
-    </form>
+    <div style="padding-left: 10px; float: left">
+        <button class="btn-primary" onclick="return changePage(1)"> Continue Shopping </button>
+    </div>
+    <div style="padding-left: 10px; float: left">
+        <button class="btn-success" onclick="return changePage(2)"> Checkout </button>
+    </div>
 </div>
 </body>
 </html>
