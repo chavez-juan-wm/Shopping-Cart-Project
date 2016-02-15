@@ -3,40 +3,86 @@
 <head>
     <meta charset="utf-8">
     <title>Home</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/slider.css" rel="stylesheet">
 
     <!-- Files for menu bar -->
     <script src="js/navbar.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
+
+    <!-- Scripts for slider -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="js/responsiveslides.min.js"></script>
 </head>
 
 <body>
-
-<div style="z-index: 10" id='cssmenu'>
-    <ul>
-        <li class="active"><a href='index.html'><span>Home</span></a></li>
-        <li><a href='#'><span>About</span></a>
-            <ul>
-                <li class='has-sub'><a href='aboutUs.html'><span>About Us</span></a></li>
-                <li class='has-sub'><a href='FAQ.html'><span>Frequently Asked Questions</span></a></li>
-            </ul>
-        </li>
-        <li><a href='products.php'><span>Products</span></a></li>
-        <li><a href='cart.php'><span>Cart</span></a></li>
-        <li style="float: right;"><a href='login.php'><span>Profile</span></a></li>
-    </ul>
-</div>
-
-<div id = bodyText>
-    <div style="text-align: center;">
-        <img src="pics/slider1.jpg" style="width: 30%; margin-top: 10px">
+    <div style="z-index: 10" id='cssmenu'>
+        <ul>
+            <li class="active"><a href='index.html'><span>Home</span></a></li>
+            <li><a href='#'><span>About</span></a>
+                <ul>
+                    <li class='has-sub'><a href='aboutUs.html'><span>About Us</span></a></li>
+                    <li class='has-sub'><a href='FAQ.html'><span>Frequently Asked Questions</span></a></li>
+                </ul>
+            </li>
+            <li><a href='products.php'><span>Products</span></a></li>
+            <li><a href='cart.php'><span>Cart</span></a></li>
+            <li style="float: right;"><a href='login.php'><span>Profile</span></a></li>
+        </ul>
     </div>
-    <br/><hr/><br/>
 
-    <div style="margin-left: 10px">
-        <h2 style="margin-top: 0;">Games for Everyone!</h2>
-        <p> I don't know what to put here!</p>
+    <div id = bodyText>
+        <div style="text-align: center">
+            <div id="slider">
+                <ul class="rslides">
+                    <li><img src="pics/life.jpg" style="width: 35%"></li>
+                    <li><img src="pics/candyland.gif" style="width: 40%"></li>
+                    <li><img src="pics/sorry.jpg"></li>
+                    <li><img src="pics/apples_to_apples.jpg" style="width: 23%"></li>
+                    <li><img src="pics/checkers.png" style="width: 40%"></li>
+                    <li><img src="pics/exploding_kittens.png" style="width: 31%"></li>
+                    <li><img src="pics/monopoly.jpg" style="width: 40%"></li>
+                    <li><img src="pics/uno.jpg" style="width: 25%;"></li>
+                    <li><img src="pics/bicycle_cards.jpg" style="width: 25%"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <img src="pics/game_night.png" style="width: 25%; margin-top: 5px; padding-left: 10px">
+            <p style="font-size: large; margin: 10px 20px 10px 20px">Welcome to our family friendly webpage! We are known to satisfy any family whose goal is to have fun and spend quaility time with their loved ones. Browse through our affordable products and find a game that fits your style!</p>
+        </div>
+
+        <div style="float: right; margin-right: 35px;">
+            <button class="btn-primary" onclick="window.location.href = 'products.php'">Start Shopping</button>
+        </div>
     </div>
-</div>
+
+    <script>
+        $(function()
+        {
+            $(".rslides").responsiveSlides({
+                auto: true,             // Boolean: Animate automatically, true or false
+                speed: 800,            // Integer: Speed of the transition, in milliseconds
+                timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+                pager: false,           // Boolean: Show pager, true or false
+                nav: false,             // Boolean: Show navigation, true or false
+                random: false,          // Boolean: Randomize the order of the slides, true or false
+                pause: false,           // Boolean: Pause on hover, true or false
+                pauseControls: false,    // Boolean: Pause when hovering controls, true or false
+                prevText: "Previous    ",   // String: Text for the "previous" button
+                nextText: "    Next",       // String: Text for the "next" button
+                maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+                navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+                manualControls: "",     // Selector: Declare custom pager navigation
+                namespace: "rslides",   // String: Change the default namespace used
+                before: function () {
+                },   // Function: Before callback
+                after: function () {
+                }
+            }); // Starts slider
+        });
+    </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 
     if($currentUser3 == 1)
     {
-        $check = "No one is signed in.";
+        $check = "No one is currently signed in.";
         $sql = "SELECT * FROM users WHERE userId = 1";
         $res = $dbh->prepare($sql);
         $res -> execute();
@@ -25,7 +25,7 @@
         $users = $res->fetchAll();
     }
 
-    if(@$_POST['addUser'])
+    if(@$_POST['signIn'])
     {
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -41,6 +41,7 @@
                     <td><button class='btn-primary' type='submit' name='logout' value='1'>Log Out</button></td>
                 </form>";
             $check = "You have successfully signed in as: ";
+
             $currentUser2 = $res->fetch();
             $currentUser3 = $currentUser2['userId'];
 
@@ -63,7 +64,7 @@
     if(@$_POST['logout'])
     {
         $logout = '';
-        $check = "You have successfully signed out ";
+        $check = "You have successfully signed out.";
 
         $sql = "UPDATE `shopping_cart`.`users` SET `currentUser`= '1' WHERE `userId`='1';";
         $set = $dbh->prepare($sql);
@@ -100,7 +101,6 @@
             border:none;
             padding:0!important;
             font: inherit;
-            /*border is optional*/
             cursor: pointer;
         }
     </style>
@@ -127,12 +127,12 @@
         <div class="card card-container">
             <img id="profile-img" class="profile-img-card" src="https://www.junkfreejune.org.nz/themes/base/production/images/default-profile.png" />
 
-            <form name="addUser" method = "post" class="form-signin">
+            <form name="signIn" method = "post" class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="email" class="form-control, inputEmail" name="email" placeholder="Email address" required autofocus>
                 <input type="password" class="form-control, inputPassword" name="password" placeholder="Password" required>
 
-                <button name="addUser" value="1" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+                <button name="signIn" value="1" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
             </form>
             <!-- /form -->
 
@@ -144,7 +144,7 @@
         </div><!-- /card-container -->
     </div><!-- /container -->
 
-    <p style="padding-left: 7px"><?php echo $check ?></p>
+    <p style="padding-left: 7px; color: mediumblue"><?php echo $check ?></p>
 
     <table class="table" align="center">
         <thead>
@@ -156,16 +156,14 @@
 
         <tbody>
         <?php
-        foreach($users as $user){
+        foreach($users as $user)
+        {
             ?>
             <tr>
                 <td><?php echo $user['firstName']?></td>
                 <td><?php echo $user['lastName']?></td>
                 <td><?php echo $user['email']?></td>
-
                 <?php echo $logout ?>
-
-
             </tr>
             <?php
         }

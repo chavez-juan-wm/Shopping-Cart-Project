@@ -1,7 +1,7 @@
 <?php
     require_once("connect.php");
 
-    if(@$_POST['addProduct'])
+    if(@$_POST['addProduct'] && $currentUser3 != 1)
     {
         $productId = $_POST['addProduct'];
 
@@ -16,10 +16,11 @@
             $stmt = $dbh -> prepare($sql);
             $result = $stmt -> execute();
         }
-        echo "<script>
-        window.location.href = 'cart.php';
-    </script>";
+        header("Location: cart.php");
     }
+
+    else if (@$_POST['addProduct'] && $currentUser3 == 1)
+        header("Location: cart.php");
 ?>
 
 <!DOCTYPE html>
@@ -109,8 +110,8 @@
         <li><a href='index.html'><span>Home</span></a></li>
         <li><a href='#'><span>About</span></a>
             <ul>
-                <li class='has-sub'><a href=''><span>About Us</span></a></li>
-                <li class='has-sub'><a href=''><span>Frequently Asked Questions</span></a></li>
+                <li class='has-sub'><a href='aboutUs.html'><span>About Us</span></a></li>
+                <li class='has-sub'><a href='FAQ.html'><span>Frequently Asked Questions</span></a></li>
             </ul>
         </li>
         <li class="active"><a href='products.php'><span>Products</span></a></li>

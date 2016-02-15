@@ -1,17 +1,10 @@
 <?php
     require_once("connect.php");
 
-    $error = false;
-    $success = false;
-
     if(@$_POST['addUser'])
     {
         if($_POST['firstName'] && $_POST['lastName'] && $_POST['password'] && $_POST['email'])
         {
-            /**
-            * If we're here...all is well. Process the insert
-            */
-
             $stmt = $dbh->prepare('INSERT INTO users (firstName, lastName, email, password) VALUES (:firstName, :lastName, :email, :password)');
             $result = $stmt->execute(
             array(
@@ -21,30 +14,10 @@
                     'password'=>$_POST['password'],
                 )
             );
-
-            if($result)
-            {
-                $success = "User " . $_POST['firstName'] . " was successfully saved.";
-            }
-            else
-            {
-                $success = "There was an error saving " . $_POST['firstName'];
-            }
-
             header("Location: login.php");
         }
     }
-
-    /**
-    * We'll always want to pull the users to show them in the table
-    */
-$stmt = $dbh->prepare('SELECT * FROM users WHERE userId != 1');
-$stmt->execute();
-$users = $stmt->fetchAll();
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -152,50 +125,6 @@ $users = $stmt->fetchAll();
                 </a>
             </div><!-- /card-container -->
         </div><!-- /container -->
-
-        <div align="center" class="error">
-            <?php
-            if($error){
-                echo $error;
-                echo '<br /><br />';
-            }
-            ?>
-        </div>
-
-
-        <div align="center" class="success">
-            <?php
-            if($success){
-                echo $success;
-                echo '<br /><br />';
-            }
-            ?>
-        </div>
-
-
-        <table class="table" align="center">
-            <thead>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Password</th>
-            </thead>
-
-            <tbody>
-            <?php
-            foreach($users as $user){
-                ?>
-                <tr>
-                    <td><?php echo $user['firstName']?></td>
-                    <td><?php echo $user['lastName']?></td>
-                    <td><?php echo $user['email']?></td>
-                    <td><?php echo $user['password']?></td>
-                </tr>
-                <?php
-            }
-            ?>
-            </tbody>
-        </table>
     </div>
 </body>
 
