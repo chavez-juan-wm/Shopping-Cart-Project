@@ -1,6 +1,8 @@
 <?php
     require_once("connect.php");
 
+//  If the user clicks on the Add to Cart button AND they are currently signed in, then their item will be added and
+// they will be sent to their cart.
     if(@$_POST['addProduct'] && $currentUser3 != 1)
     {
         $productId = $_POST['addProduct'];
@@ -10,15 +12,18 @@
         $res -> execute();
         $count = $res->rowCount();
 
+//      This checks if the item the user wants to add to their cart isn't already in there. This prevents duplicate rows
+//      from being created in the database.
         if($count == 0)
         {
             $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('".$productId."', '$currentUser3', '1');";
             $stmt = $dbh -> prepare($sql);
-            $result = $stmt -> execute();
+            $stmt -> execute();
         }
         header("Location: cart.php");
     }
 
+//  If the add to cart button is clicked, then they will be sent to the cart, but nothing will be added because they aren't signed in.
     else if (@$_POST['addProduct'] && $currentUser3 == 1)
         header("Location: cart.php");
 ?>
@@ -48,6 +53,7 @@
 <body>
 
 <script>
+//  All the jQuery that shows the hidden divs when their image is clicked
     $(document).ready(function(){
 
         $(".close").click(function(){

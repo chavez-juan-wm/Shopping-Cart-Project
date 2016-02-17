@@ -1,6 +1,7 @@
 <?php
     require_once("connect.php");
 
+//    Redirects the page to the payment page when they submit all of the required info in the form
     if(@$_POST['billing'])
     {
         header("Location: payment.php");
@@ -47,6 +48,8 @@
             <li style="float: right;"><a href='login.php'><span>Profile</span></a></li>
         </ul>
     </div>
+
+    <!-- Start of the address details -->
     <div style="margin-top: 3%">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">

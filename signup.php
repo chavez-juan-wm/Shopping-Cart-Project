@@ -3,6 +3,7 @@
 
     if(@$_POST['addUser'])
     {
+//      Inserts the user's information when signing up
         if($_POST['firstName'] && $_POST['lastName'] && $_POST['password'] && $_POST['email'])
         {
             $stmt = $dbh->prepare('INSERT INTO users (firstName, lastName, email, password) VALUES (:firstName, :lastName, :email, :password)');
@@ -45,6 +46,7 @@
 <body>
 
     <script>
+//      Makes sure the password and confirm password are equal to each other
         $(document).ready(function()
         {
             $("#confirm").on('change', function(){

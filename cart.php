@@ -4,24 +4,29 @@
     $total = 0;
     $items = "";
 
+//  The mysql query that gets the product name, image link, price, product id, and quantity
     $query = "SELECT products.productName, products.productLink, products.productPrice, products.productId, orders.quantity
             FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = '$currentUser3'";
 
+//  Executes the query above and counts how many rows it has
     $stmt = $dbh->prepare($query);
     $stmt->execute();
     $users = $stmt->fetchAll();
     $count = $stmt->rowCount();
 
+//  If no one is currently signed in, it prompts the user to sign in to add items to their cart
     if ($currentUser3 == 1)
     {
         $items = "<a href= 'login.php'>Sign in</a> to add items to your cart.";
     }
 
+//  If there are no rows to the query above, it means that they have no items in their cart, so the echo lets them know.
     else if ($count == 0)
         $items = "You currently have no items in your cart.";
     else
         $items = "";
 
+//  If the quantity button is clicked, it updates the quantity in the database.
     if(@$_POST['product'])
     {
         $productId = $_POST['product'];
@@ -35,6 +40,7 @@
         $users = $stmt->fetchAll();
     }
 
+//  If the delete button is clicked, it deletes the row from where the product was in
     if(@$_POST['delete'])
     {
         $productId = $_POST['delete'];
@@ -51,12 +57,14 @@
             $items = "You currently have no items in your cart.";
     }
 
+//  If the checkout button is clicked, it changes the page to the billing page
     if(@$_POST['Checkout'])
     {
         if($count != 0)
             header("Location: billing.php");
     }
 
+//  If the continue shopping button is clicked, it changes the page back to the products page
     if(@$_POST['continue'])
     {
         header("Location: products.php");
@@ -81,6 +89,7 @@
             width: 140px;
             height: 110px;
         }
+        /* CSS to make a button look like a link */
         .link
         {
             color: dodgerblue;

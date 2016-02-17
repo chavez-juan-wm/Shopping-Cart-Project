@@ -4,6 +4,8 @@
 
     $total = 0;
 
+
+//  Just displays all of the receipt elements. The product name, price, and quantity.
     $query = "SELECT products.productName, products.productPrice, orders.quantity
                 FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = '$currentUser3'";
 

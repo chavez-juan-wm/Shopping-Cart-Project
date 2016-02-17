@@ -4,7 +4,7 @@
     /*** mysql username ***/
     $username = 'root';
     /*** mysql password ***/
-    $password = '';
+    $password = 'root';
 
     try
     {
@@ -18,6 +18,7 @@
     }
 
 
+//  Gets the current user from the database
     $sql = "SELECT currentUser FROM users WHERE userId = 1";
     $currentUser = $dbh->prepare($sql);
     $currentUser -> execute();
