@@ -125,7 +125,7 @@
 
     <div class="container">
         <div class="card card-container">
-            <img id="profile-img" class="profile-img-card" src="https://www.junkfreejune.org.nz/themes/base/production/images/default-profile.png" />
+            <img id="profile-img" class="profile-img-card" src="pics/profile.png"/>
 
             <form name="signIn" method = "post" class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>

@@ -59,55 +59,16 @@
         $(".close").click(function(){
             $(".secondDiv").fadeOut(400);
 
-            for(var i = 1; i<=9; i++)
+            for(var i = 1; i<=12; i++)
                 $("#product" + i).fadeOut(400);
         });
 
-        $("#img1").click(function(){
+        $("img").click(function(){
+            var product = this.id;
+            var number = product.substring(3, 5);
             $(".secondDiv").fadeIn(400);
-            $("#product1").fadeIn(500);
+            $("#product" + number).fadeIn(500);
         });
-
-        $("#img2").click(function(){
-            $(".secondDiv").fadeIn(400);
-            $("#product2").fadeIn(500);
-        });
-
-        $("#img3").click(function(){
-            $(".secondDiv").fadeIn(400);
-            $("#product3").fadeIn(500);
-        });
-
-        $("#img4").click(function(){
-            $(".secondDiv").fadeIn(400);
-            $("#product4").fadeIn(500);
-        });
-
-        $("#img5").click(function(){
-            $(".secondDiv").fadeIn(400);
-            $("#product5").fadeIn(500);
-        });
-
-        $("#img6").click(function(){
-            $(".secondDiv").fadeIn(400);
-            $("#product6").fadeIn(500);
-        });
-
-        $("#img7").click(function(){
-            $(".secondDiv").fadeIn(400);
-            $("#product7").fadeIn(500);
-        });
-
-        $("#img8").click(function(){
-            $(".secondDiv").fadeIn(400);
-            $("#product8").fadeIn(500);
-        });
-
-        $("#img9").click(function(){
-            $(".secondDiv").fadeIn(400);
-            $("#product9").fadeIn(500);
-        });
-
     });
 </script>
 
@@ -395,6 +356,95 @@
                         </ul>
                     </div>
                 </div>
+
+                <div id="product10" style="display: none">
+                    <button class="close">&#10006;</button>
+
+                    <div style="width: 45%; float: left">
+                        <div class="image">
+                            <img src="pics/chess.jpg" style="width: 300%; height: 280%">
+                        </div>
+                    </div>
+
+                    <div style="float: left; margin-top: 3%; margin-left: 25%">
+                        <h2 style="text-align: center">Chess</h2>
+                        <h3 style="text-align: center">$12.99</h3>
+                        <div style="text-align: center">
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="10">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="imgInfo" style="padding-top: 10px; padding-bottom: 10px;">
+                        <ul>
+                            <li>Chess family classics edition</li>
+                            <li>Features heavy-duty folding board</li>
+                            <li>Solid staunton chess pieces</li>
+                            <li>For 2 players</li>
+                            <li>Ages 8 to adult</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="product11" style="display: none">
+                    <button class="close">&#10006;</button>
+
+                    <div style="width: 30%; float: left;">
+                        <div class="image">
+                            <img src="pics/connect4.jpg" style="width: 300%; height: 280%">
+                        </div>
+                    </div>
+
+                    <div style="float: left; margin-top: 3%; margin-left: 33%">
+                        <h2 style="text-align: center">Connect 4</h2>
+                        <h3 style="text-align: center">$12.99</h3>
+                        <div style="text-align: center">
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="11">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="imgInfo" style="padding-top: 10px; padding-bottom: 10px;">
+                        <ul>
+                            <li>Classic Connect 4 game is disc-dropping fun</li>
+                            <li>Choose yellow or red discs</li>
+                            <li>When you get 4 discs in a row you win</li>
+                            <li>Includes grid, 2 legs, slider bar, 21 red discs, 21 yellow discs and instructions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="product12" style="display: none">
+                    <button class="close">&#10006;</button>
+
+                    <div style="width: 30%; float: left;">
+                        <div class="image">
+                            <img src="pics/pictionary.jpg" style="width: 300%; height: 280%">
+                        </div>
+                    </div>
+
+                    <div style="float: left; margin-top: 3%; margin-left: 33%">
+                        <h2 style="text-align: center">Pictionary</h2>
+                        <h3 style="text-align: center">$24.99</h3>
+                        <div style="text-align: center">
+                            <form name="addProduct" method="post">
+                                <button class="btn" type="submit" name="addProduct" value="12">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="imgInfo" style="padding-top: 7px; padding-bottom: 7px;">
+                        <ul>
+                            <li>The beloved game of quick sketches and hilarious guesses</li>
+                            <li>Features a new board for faster game play</li>
+                            <li>There are two levels of clues (1200 Adult, 800 Junior) so that everyone can play</li>
+                            <li>It's a classic, family and kid favorite!</li>
+                            <li>For 3 or more players</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -403,11 +453,13 @@
                 <td><img id= "img1" src="pics/exploding_kittens.png" style="cursor: pointer"></td>
                 <td><img id= "img2" src="pics/monopoly.jpg" style="cursor: pointer"></td>
                 <td><img id= "img3" src="pics/life.jpg" style="cursor: pointer"></td>
+                <td><img id= "img10" src="pics/chess.jpg" style="cursor: pointer"></td>
             </tr>
             <tr>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">Exploding Kittens</h4></td>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">Monopoly</h4></td>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">The Game of Life</h4></td>
+                <td class="description" valign="top"><h4 style="margin-top: 1px">Chess</h4></td>
             </tr>
             <tr>
                 <td><img id= "img4" src="pics/candyland.gif" style="cursor: pointer"></td>
@@ -417,21 +469,25 @@
                         <img id= "img6" src="pics/apples_to_apples.jpg" style="width: 130px; height:125px; cursor: pointer">
                     </div>
                 </td>
+                <td><img id= "img11" src="pics/connect4.jpg" style="cursor: pointer; width: 185px; height:125px;"></td>
             </tr>
             <tr>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">Candy Land</h4></td>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">Checkers</h4></td>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">Apples to Apples</h4></td>
+                <td class="description" valign="top"><h4 style="margin-top: 1px">Connect 4</h4></td>
             </tr>
             <tr>
                 <td><img id= "img7" src="pics/uno.jpg" style="width: 185px; height: 180px; cursor: pointer"></td>
                 <td><img id= "img8" src="pics/bicycle_cards.jpg" style="width: 185px; height: 180px; cursor: pointer"></td>
                 <td><img id= "img9" src="pics/sorry.jpg" style="cursor: pointer"></td>
+                <td><img id= "img12" src="pics/pictionary.jpg" style="cursor: pointer; width: 185px; height:125px;"></td>
             </tr>
             <tr>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">Uno</h4></td>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">Bicycle Rider Playing Cards</h4></td>
                 <td class="description" valign="top"><h4 style="margin-top: 1px">Sorry</h4></td>
+                <td class="description" valign="top"><h4 style="margin-top: 1px">Pictionary</h4></td>
             </tr>
         </table>
     </div>
