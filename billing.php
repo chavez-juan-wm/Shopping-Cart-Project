@@ -2,20 +2,59 @@
     require_once("connect.php");
 
 //    Redirects the page to the payment page when they submit all of the required info in the form
+    $sql = "SELECT * FROM address WHERE userId='".$currentUser3."'";
+    $res = $dbh->prepare($sql);
+    $res->execute();
+    $info = $res->fetch();
+    $count = $res->rowCount();
+
+    if ($count == 1)
+    {
+        if($info['addressLine2'] == '')
+            $addressLine2 = "placeholder = 'Address Line 2'";
+        else
+            $addressLine2 = "value = " . $info['addressLine2'];
+
+        $addressLine1 = "value = " . $info['addressLine1'];
+        $city = "value = " . $info['city'];
+        $state = "value = " . $info['state'];
+        $postcode = "value = " . $info['postcode'];
+        $country = "value = " . $info['country'];
+    }
+    else
+    {
+        $addressLine1 = "placeholder = 'Address Line 1'";
+        $addressLine2 = "placeholder = 'Address Line 2'";
+        $city = "placeholder = 'City'";
+        $state = "placeholder = 'State'";
+        $postcode = "placeholder = 'Post Code'";
+        $country = "placeholder = 'Country'";
+    }
+
     if(@$_POST['billing'])
     {
-        $sql = "SELECT * FROM address WHERE userId='".$currentUser3."'";
-        $res = $dbh->prepare($sql);
-        $res->execute();
-        $count = $res->rowCount();
-
         if ($count == 1)
         {
-            echo "There was 1";
-            //        header("Location: payment.php");
+            $sql = "UPDATE `shopping_cart`.`address` SET `addressLine1`='".$_POST['addressLine1']."', `addressLine2`='".$_POST['addressLine2']."', `city`='".$_POST['city']."', `state`='".$_POST['state']."', `postcode`='".$_POST['postcode']."', `country`='".$_POST['country']."' WHERE `userId`='".$currentUser3."'";
+            $res = $dbh->prepare($sql);
+            $res->execute();
         }
         else
-            echo "None";
+        {
+            $stmt = $dbh->prepare('INSERT INTO address (userId, addressLine1, addressLine2, city, state, postcode, country) VALUES (:userId, :addressLine1, :addressLine2, :city, :state, :postcode, :country)');
+            $result = $stmt->execute(
+                array(
+                    'userId'=>$currentUser3,
+                    'addressLine1'=>$_POST['addressLine1'],
+                    'addressLine2'=>$_POST['addressLine2'],
+                    'city'=>$_POST['city'],
+                    'state'=>$_POST['state'],
+                    'postcode'=>$_POST['postcode'],
+                    'country'=>$_POST['country']
+                )
+            );
+        }
+        header("Location: payment.php");
     }
 ?>
 
@@ -71,7 +110,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Line 1</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="Address Line 1" class="form-control" required>
+                            <input type="text" <?= $addressLine1 ?> name="addressLine1" class="form-control" required>
                         </div>
                     </div>
 
@@ -79,7 +118,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Line 2</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="Address Line 2" class="form-control">
+                            <input type="text" <?= $addressLine2 ?> name="addressLine2" class="form-control">
                         </div>
                     </div>
 
@@ -87,7 +126,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">City</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="City" class="form-control" required>
+                            <input type="text" <?= $city ?> name="city" class="form-control" required>
                         </div>
                     </div>
 
@@ -95,12 +134,12 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">State</label>
                         <div class="col-sm-4">
-                            <input type="text" placeholder="State" class="form-control" required>
+                            <input type="text" <?= $state ?> name="state" class="form-control" required>
                         </div>
 
                         <label class="col-sm-2 control-label" for="textinput">Postcode</label>
                         <div class="col-sm-4">
-                            <input type="text" placeholder="Post Code" class="form-control" required>
+                            <input type="text" <?= $postcode ?> name="postcode" class="form-control" required>
                         </div>
                     </div>
 
@@ -108,7 +147,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Country</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="Country" class="form-control" required>
+                            <input type="text" <?= $country ?> name="country" class="form-control" required>
                         </div>
                     </div>
 
