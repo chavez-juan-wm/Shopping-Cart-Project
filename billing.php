@@ -4,9 +4,19 @@
 //    Redirects the page to the payment page when they submit all of the required info in the form
     if(@$_POST['billing'])
     {
-        header("Location: payment.php");
-    }
+        $sql = "SELECT * FROM address WHERE userId='".$currentUser3."'";
+        $res = $dbh->prepare($sql);
+        $res->execute();
+        $count = $res->rowCount();
 
+        if ($count == 1)
+        {
+            echo "There was 1";
+            //        header("Location: payment.php");
+        }
+        else
+            echo "None";
+    }
 ?>
 
 <!DOCTYPE html>
