@@ -1,8 +1,48 @@
 <?php
     require_once("connect.php");
 
+    $sql = "SELECT * FROM payment WHERE userId='".$currentUser3."'";
+    $res = $dbh->prepare($sql);
+    $res->execute();
+    $info = $res->fetch();
+    $count = $res->rowCount();
+
+    if ($count == 1)
+    {
+        $cardNumber = "value = " . $info['cardNumber'];
+        $month = "value = " . $info['month'];
+        $year = "value = " . $info['year'];
+        $cvCode = "value = " . $info['cvCode'];
+    }
+    else
+    {
+        $cardNumber = "placeholder = 'Valid Card Number'";
+        $month = "placeholder = 'MM'";
+        $year = "placeholder = 'YY'";
+        $cvCode = "placeholder = 'CV'";
+    }
+
     if(@$_POST['continue'])
     {
+        if ($count == 1)
+        {
+            $sql = "UPDATE `shopping_cart`.`payment` SET `cardNumber`='".$_POST['cardNumber']."', `month`='".$_POST['month']."', `year`='".$_POST['year']."', `cvCode`='".$_POST['cvCode']."' WHERE `userId`='".$currentUser3."'";
+            $res = $dbh->prepare($sql);
+            $res->execute();
+        }
+        else
+        {
+            $stmt = $dbh->prepare('INSERT INTO payment (cardNumber, month, year, cvCode, userId) VALUES (:cardNumber, :month, :year, :cvCode, :userId)');
+            $result = $stmt->execute(
+                array(
+                    'cardNumber'=>$_POST['cardNumber'],
+                    'month'=>$_POST['month'],
+                    'year'=>$_POST['year'],
+                    'cvCode'=>$_POST['cvCode'],
+                    'userId'=>$currentUser3
+                )
+            );
+        }
         header("Location: receipt.php");
     }
 ?>
@@ -50,7 +90,7 @@
                     <div class="form-group">
                         <label for="cardNumber">Card Number</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number" required autofocus />
+                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" <?= $cardNumber ?> required autofocus />
 					<span class="input-group-addon">
 					  <span class="glyphicon glyphicon-lock"></span>
 					</span>
@@ -61,17 +101,17 @@
                             <div class="form-group">
                                 <label for="expiryMonth">Card Expiry Date</label>
                                 <div class="col-xs-6 col-lg-6 pl-ziro">
-                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                    <input type="text" class="form-control" id="expityMonth" name="month" <?= $month ?> required />
                                 </div> <!-- .col-xs-6 .col-lg-6 .pl-ziro -->
                                 <div class="col-xs-6 col-lg-6 pl-ziro">
-                                    <input type="text" class="form-control" id="expityYear" placeholder="YY" required />
+                                    <input type="text" class="form-control" id="expityYear" name="year" <?= $year ?> required />
                                 </div> <!-- .col-xs-6 .col-lg-6 .pl-ziro -->
                             </div> <!-- .form-group -->
                         </div> <!-- .col-xs-7 .col-md-7 -->
                         <div class="col-xs-5 col-md-5 pull-right">
                             <div class="form-group">
                                 <label for="cvCode">CV Code</label>
-                                <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                                <input type="password" class="form-control" id="cvCode" name="cvCode" <?= $cvCode ?> required />
                             </div> <!-- .form-group -->
                         </div> <!-- .col-xs-5 .col-md-5 .pull-right -->
                     </div> <!-- .row -->
