@@ -6,7 +6,7 @@
     if($currentUser3 == 1)
     {
         $check = "No one is currently signed in.";
-        $sql = "SELECT * FROM users WHERE userId = 1";
+        $sql = "SELECT * FROM users WHERE userId = '1'";
         $res = $dbh->prepare($sql);
         $res -> execute();
 
@@ -19,9 +19,9 @@
                     <td><button class='btn-primary' type='submit' name='logout' value='1'>Log Out</button></td>
                 </form>";
         $check = "You are currently signed in as: ";
-        $sql = "SELECT * FROM users WHERE userId = $currentUser3";
+        $sql = "SELECT * FROM users WHERE userId = :userId";
         $res = $dbh->prepare($sql);
-        $res -> execute();
+        $res -> execute(array('userId'=>$currentUser3));
         $users = $res->fetchAll();
     }
 
@@ -30,9 +30,14 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $sql = "SELECT * FROM users WHERE email='".$email."' AND password ='".$password."'";
+        $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
         $res = $dbh->prepare($sql);
-        $res -> execute();
+        $res -> execute(
+            array(
+                'email'=>$email,
+                'password'=>$password
+            )
+        );
         $count = $res->rowCount();
 
         if ($count == 1)
@@ -45,13 +50,20 @@
             $currentUser2 = $res->fetch();
             $currentUser3 = $currentUser2['userId'];
 
-            $sql = "UPDATE `shopping_cart`.`users` SET `currentUser`= $currentUser3 WHERE `userId`='1';";
+            $sql = "UPDATE users SET currentUser = :userId WHERE userId = '1'";
             $set = $dbh->prepare($sql);
-            $set -> execute();
+            $set -> execute(
+                array('userId'=>$currentUser3)
+            );
 
-            $sql = "SELECT * FROM users WHERE email='".$email."' AND password ='".$password."'";
+            $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
             $res = $dbh->prepare($sql);
-            $res -> execute();
+            $res -> execute(
+                array(
+                    'email'=>$email,
+                    'password'=>$password
+                )
+            );
             $users = $res->fetchAll();
         }
 
@@ -66,11 +78,11 @@
         $logout = '';
         $check = "You have successfully signed out.";
 
-        $sql = "UPDATE `shopping_cart`.`users` SET `currentUser`= '1' WHERE `userId`='1';";
+        $sql = "UPDATE users SET currentUser = '1' WHERE userId = '1';";
         $set = $dbh->prepare($sql);
         $set -> execute();
 
-        $sql = "SELECT * FROM users WHERE userId = 1";
+        $sql = "SELECT * FROM users WHERE userId = '1'";
         $res = $dbh->prepare($sql);
         $res -> execute();
         $users = $res->fetchAll();

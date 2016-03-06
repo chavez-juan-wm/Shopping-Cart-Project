@@ -1,9 +1,9 @@
 <?php
     require_once("connect.php");
 
-    $sql = "SELECT * FROM payment WHERE userId='".$currentUser3."'";
+    $sql = "SELECT * FROM payment WHERE userId= :userId";
     $res = $dbh->prepare($sql);
-    $res->execute();
+    $res->execute(array('userId'=>$currentUser3));
     $info = $res->fetch();
     $count = $res->rowCount();
 
@@ -26,9 +26,17 @@
     {
         if ($count == 1)
         {
-            $sql = "UPDATE `shopping_cart`.`payment` SET `cardNumber`='".$_POST['cardNumber']."', `month`='".$_POST['month']."', `year`='".$_POST['year']."', `cvCode`='".$_POST['cvCode']."' WHERE `userId`='".$currentUser3."'";
+            $sql = "UPDATE payment SET cardNumber = :cardNumber, month = :month, year = :year, cvCode = :cvCode WHERE userId = :userId";
             $res = $dbh->prepare($sql);
-            $res->execute();
+            $res->execute(
+                array(
+                    'cardNumber'=>$_POST['cardNumber'],
+                    'month'=>$_POST['month'],
+                    'year'=>$_POST['year'],
+                    'cvCode'=>$_POST['cvCode'],
+                    'userId'=>$currentUser3
+                )
+            );
         }
         else
         {

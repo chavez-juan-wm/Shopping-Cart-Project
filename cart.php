@@ -6,11 +6,11 @@
 
 //  The mysql query that gets the product name, image link, price, product id, and quantity
     $query = "SELECT products.productName, products.productLink, products.productPrice, products.productId, orders.quantity
-            FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = '$currentUser3'";
+            FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = :userId";
 
 //  Executes the query above and counts how many rows it has
     $stmt = $dbh->prepare($query);
-    $stmt->execute();
+    $stmt->execute(array('userId'=>$currentUser3));
     $users = $stmt->fetchAll();
     $count = $stmt->rowCount();
 
@@ -31,12 +31,18 @@
     {
         $productId = $_POST['product'];
         $quantity = $_POST['quantity'];
-        $sql = "UPDATE `shopping_cart`.`orders` SET `quantity`='$quantity' WHERE userId='".$currentUser3."' AND productId ='".$productId."'";
+        $sql = "UPDATE orders SET quantity= :quantity WHERE userId= :userId AND productId = :productId";
         $res = $dbh->prepare($sql);
-        $res -> execute();
+        $res -> execute(
+            array(
+                'quantity'=>$quantity,
+                'userId'=>$currentUser3,
+                'productId'=>$productId
+            )
+        );
 
         $stmt = $dbh->prepare($query);
-        $stmt->execute();
+        $stmt->execute(array('userId'=>$currentUser3));
         $users = $stmt->fetchAll();
     }
 
@@ -44,12 +50,17 @@
     if(@$_POST['delete'])
     {
         $productId = $_POST['delete'];
-        $sql = "DELETE FROM `shopping_cart`.`orders` WHERE `userId`='".$currentUser3."' AND productId = '".$productId."'";;
+        $sql = "DELETE FROM orders WHERE userId = :userId AND productId = :productId";
         $res = $dbh->prepare($sql);
-        $res -> execute();
+        $res -> execute(
+            array(
+                'userId'=>$currentUser3,
+                'productId'=>$productId
+            )
+        );
 
         $stmt = $dbh->prepare($query);
-        $stmt->execute();
+        $stmt->execute(array('userId'=>$currentUser3));
         $users = $stmt->fetchAll();
         $count = $stmt->rowCount();
 

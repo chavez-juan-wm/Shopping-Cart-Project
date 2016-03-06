@@ -7,10 +7,10 @@
 
 //  Just displays all of the receipt elements. The product name, price, and quantity.
     $query = "SELECT products.productName, products.productPrice, orders.quantity
-                FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = '$currentUser3'";
+                FROM orders LEFT JOIN products on orders.productId = products.productId WHERE userId = :userId";
 
     $stmt = $dbh->prepare($query);
-    $stmt->execute();
+    $stmt->execute(array('userId'=>$currentUser3));
     $users = $stmt->fetchAll();
 ?>
 

@@ -7,18 +7,28 @@
     {
         $productId = $_POST['addProduct'];
 
-        $sql = "SELECT * FROM orders WHERE userId='".$currentUser3."' AND productId ='".$productId."'";
+        $sql = "SELECT * FROM orders WHERE userId = :userId AND productId = :productId";
         $res = $dbh->prepare($sql);
-        $res -> execute();
+        $res -> execute(
+            array(
+                'userId'=>$currentUser3,
+                'productId'=>$productId
+            )
+        );
         $count = $res->rowCount();
 
 //      This checks if the item the user wants to add to their cart isn't already in there. This prevents duplicate rows
 //      from being created in the database.
         if($count == 0)
         {
-            $sql = "INSERT INTO `shopping_cart`.`orders` (`productId`, `userId`, `quantity`) VALUES ('".$productId."', '$currentUser3', '1');";
+            $sql = "INSERT INTO orders (productId, userId, quantity) VALUES (:productId, :userId, '1');";
             $stmt = $dbh -> prepare($sql);
-            $stmt -> execute();
+            $stmt -> execute(
+                array(
+                    'productId'=>$productId,
+                    'userId'=>$currentUser3
+                )
+            );
         }
         header("Location: cart.php");
     }
