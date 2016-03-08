@@ -51,6 +51,29 @@
                 )
             );
         }
+
+        $sql = "SELECT * FROM orders WHERE userId = :userId";
+        $res= $dbh->prepare($sql);
+        $res -> execute(array('userId'=>$currentUser3));
+        $info = $res->fetchALl();
+
+        foreach($info as $value)
+        {
+            $stmt = $dbh->prepare('INSERT INTO history (productId, userId, quantity) VALUES (:productId, :userId, :quantity)');
+            $result = $stmt->execute(
+                array(
+                    'productId'=>$value['productId'],
+                    'userId'=>$value['userId'],
+                    'quantity'=>$value['quantity']
+                )
+            );
+        }
+
+//        $sql = "DELETE FROM orders WHERE userId = :userId";
+//        $res = $dbh->prepare($sql);
+//        $res -> execute(
+//            array('userId'=>$currentUser3));
+
         header("Location: receipt.php");
     }
 ?>

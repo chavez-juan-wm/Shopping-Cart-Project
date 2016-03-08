@@ -31,15 +31,37 @@
     {
         $productId = $_POST['product'];
         $quantity = $_POST['quantity'];
-        $sql = "UPDATE orders SET quantity= :quantity WHERE userId= :userId AND productId = :productId";
-        $res = $dbh->prepare($sql);
-        $res -> execute(
-            array(
-                'quantity'=>$quantity,
-                'userId'=>$currentUser3,
-                'productId'=>$productId
-            )
-        );
+
+        if ($quantity == 0)
+        {
+            $sql = "DELETE FROM orders WHERE userId = :userId AND productId = :productId";
+            $res = $dbh->prepare($sql);
+            $res -> execute(
+                array(
+                    'userId'=>$currentUser3,
+                    'productId'=>$productId
+                )
+            );
+
+            $stmt = $dbh->prepare($query);
+            $stmt->execute(array('userId'=>$currentUser3));
+            $count = $stmt->rowCount();
+
+            if($count == 0)
+                $items = "You currently have no items in your cart.";
+        }
+        else
+        {
+            $sql = "UPDATE orders SET quantity= :quantity WHERE userId = :userId AND productId = :productId";
+            $res = $dbh->prepare($sql);
+            $res -> execute(
+                array(
+                    'quantity'=>$quantity,
+                    'userId'=>$currentUser3,
+                    'productId'=>$productId
+                )
+            );
+        }
 
         $stmt = $dbh->prepare($query);
         $stmt->execute(array('userId'=>$currentUser3));
@@ -75,11 +97,6 @@
             header("Location: billing.php");
     }
 
-//  If the continue shopping button is clicked, it changes the page back to the products page
-    if(@$_POST['continue'])
-    {
-        header("Location: products.php");
-    }
 ?>
 
 <!DOCTYPE html>
@@ -180,13 +197,19 @@
         <h4 style="float: right; padding-right: 50px; margin-top: 2px"><strong>Total: $<?=$total?></strong></h4>
 
         <div style="padding-left: 10px; float: left">
-            <form name="continue" method="post">
+            <form name="continue" action="products.php">
                 <button name="continue" class="btn-primary" value="1" type="submit"> Continue Shopping </button>
             </form>
         </div>
         <div style="padding-left: 10px; float: left">
-            <form name="Checkout" method="post">
-                <button name="Checkout" class="btn-success" value="1" type="submit"> Checkout </button>
+            <form method="post" name="Checkout">
+                <button class="btn-success" type="submit" name="Checkout" value="1"> Checkout </button>
+            </form>
+        </div>
+
+        <div style="padding-left: 10px; float: left">
+            <form action="history.php">
+                <button class="btn-info"> Purchase History </button>
             </form>
         </div>
     </div>
