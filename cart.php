@@ -186,7 +186,7 @@
                     </form>
                 </td>
                 <td><p style="color: orangered">$<?php $total += $user['quantity'] * $user['productPrice']; echo $user['productPrice'];?></p></td>
-                <td><p style="color: orangered">$<?php echo $user['quantity'] * $user['productPrice'];?></p></td>
+                <td><p style="color: orangered">$<?php $number = $user['quantity'] * $user['productPrice']; echo number_format((float)$number, 2, '.', '');?></p></td>
             </tr>
                     <?php
                 }
@@ -194,7 +194,7 @@
             </tbody>
         </table>
 
-        <h4 style="float: right; padding-right: 50px; margin-top: 2px"><strong>Total: $<?=$total?></strong></h4>
+        <h4 style="float: right; padding-right: 50px; margin-top: 2px"><strong>Total: $<?= number_format((float)$total, 2, '.', ''); ?></strong></h4>
 
         <div style="padding-left: 10px; float: left">
             <form name="continue" action="products.php">

@@ -17,6 +17,7 @@
         echo "Connection failed: " . $e->getMessage();
     }
 
+    date_default_timezone_set('America/Phoenix');
 
 //  Gets the current user from the database
     $sql = "SELECT currentUser FROM users WHERE userId = 1";

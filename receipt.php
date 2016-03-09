@@ -1,6 +1,5 @@
 <?php
     require_once("connect.php");
-    date_default_timezone_set('America/Phoenix');
 
     $total = 0;
 
@@ -12,6 +11,10 @@
     $stmt = $dbh->prepare($query);
     $stmt->execute(array('userId'=>$currentUser3));
     $users = $stmt->fetchAll();
+
+    $sql = "DELETE FROM orders WHERE userId = :userId";
+    $res = $dbh->prepare($sql);
+    $res -> execute(array('userId'=>$currentUser3));
 ?>
 
 <!DOCTYPE html>

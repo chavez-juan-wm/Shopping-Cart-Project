@@ -5,8 +5,8 @@ $total = 0;
 $items = "";
 
 //  The mysql query that gets the product name, image link, price, product id, and quantity
-$query = "SELECT products.productName, products.productLink, products.productPrice, products.productId, history.quantity
-            FROM history LEFT JOIN products on history.productId = products.productId WHERE userId = :userId";
+$query = "SELECT products.productName, products.productLink, products.productPrice, products.productId, history.quantity, history.date
+            FROM history LEFT JOIN products on history.productId = products.productId WHERE userId = :userId ORDER BY date DESC";
 
 //  Executes the query above and counts how many rows it has
 $stmt = $dbh->prepare($query);
@@ -19,7 +19,7 @@ $users = $stmt->fetchAll();
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Cart</title>
+    <title>Purchase History</title>
     <link href="css/styles.css" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,16 +32,6 @@ $users = $stmt->fetchAll();
         {
             width: 140px;
             height: 110px;
-        }
-        /* CSS to make a button look like a link */
-        .link
-        {
-            color: dodgerblue;
-            background:none!important;
-            border:none;
-            padding:0!important;
-            font: inherit;
-            cursor: pointer;
         }
         p
         {
@@ -67,13 +57,14 @@ $users = $stmt->fetchAll();
 </div>
 
 <div id = bodyText>
-    <h2>Shopping History</h2>
+    <h2>Purchase History</h2>
 
     <h4 style="padding-left: 7px; color: midnightblue;"><?php echo $items ?></h4>
 
     <table class="table" align="center">
         <thead>
             <th>Product</th>
+            <th>Date Purchased</th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Total</th>
@@ -93,10 +84,18 @@ $users = $stmt->fetchAll();
                     </div>
                 </td>
                 <td>
+                    <p style="padding-left: 10px">
+                    <?php
+                        $date = strtotime($user['date']);
+                        echo date('m-d-Y',$date);
+                    ?>
+                    </p>
+                </td>
+                <td>
                     <p style="padding-left: 25px"><?= $user["quantity"] ?></p>&nbsp;
                 </td>
                 <td><p style="color: orangered">$<?php $total += $user['quantity'] * $user['productPrice']; echo $user['productPrice'];?></p></td>
-                <td><p style="color: orangered">$<?php echo $user['quantity'] * $user['productPrice'];?></p></td>
+                <td><p style="color: orangered">$<?php $number = $user['quantity'] * $user['productPrice']; echo number_format((float)$number, 2, '.', '');?></p></td>
             </tr>
             <?php
         }
@@ -104,7 +103,7 @@ $users = $stmt->fetchAll();
         </tbody>
     </table>
 
-    <h4 style="float: right; padding-right: 50px; margin-top: 2px"><strong>Total: $<?=$total?></strong></h4>
+    <h4 style="float: right; padding-right: 50px; margin-top: 2px"><strong>Total: $<?= number_format((float)$total, 2, '.', ''); ?></strong></h4>
 
     <div style="padding-left: 10px; float: left">
         <form name="continue" action="products.php">
